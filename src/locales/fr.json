@@ -1,0 +1,10 @@
+{
+    "file": "storage/legends-fr.json",
+    "list": {
+        "selection": "Sélectionnez une légende",
+        "filter": "Filtrer",
+        "allPlayedAsk": "Avez-vous déjà joué à toutes les légendes ?",
+        "contribution": "Aidez-nous à fournir encore plus de légendes de fans dans cette application !",
+        "startLegend": "Commencer"
+    }
+}

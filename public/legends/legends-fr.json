@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Les Ailes de la Mort",
+        "slug": "die-eskorte-des-knigs",
+        "file": "die-eskorte-des-knigs.json",
+        "author": "Mjornir",
+        "abstract": "Des rumeurs circulant autour de nouvelles manigances de Varkur, le Sombre Mage, inquiétaient le Roi Brandur.\nSon fils héritier, le Prince Thorald, s'était lancé sur la piste du traitre. Mais depuis 2 jours, le royaume d'Andor n'avait plus de nouvelles de celui-ci.",
+        "features":{
+            "year": "2023",
+            "difficulty": "average",
+            "board": "andor",
+            "players" : "2-4"
+        },
+        "print": {
+            "version": "1.1", 
+            "url": "https://boardgamegeek.com/file/download_redirect/bea3334cfbf5d23388f8b950d2c8553741b00632dfdc2bf9/les-ailes-de-la-mort-CLASSIC-1.1.pdf"
+        }
+    },
+    {
+        "name": "Isor, le Roi des Gors",
+        "slug": "Isor-le-Roi-des-Gors",
+        "file": "isor-le-roi-des-gors.json",
+        "author": "Antigor",
+        "abstract": "Une attaque contre Andor se prépare. A sa tête, Isor, proclamé Roi des Gors. Il rassemble des forces pour submerger Andor.",
+        "features":{
+            "year": "2023",
+            "difficulty": "average",
+            "board": "andor",
+            "players" : "2-4"
+        },
+        "print": {
+            "version": "1.1", 
+            "url": "https://boardgamegeek.com/file/download_redirect/bea3334cfbf5d23388f8b950d2c8553741b00632dfdc2bf9/les-ailes-de-la-mort-CLASSIC-1.1.pdf"
+        }
+    }
+]

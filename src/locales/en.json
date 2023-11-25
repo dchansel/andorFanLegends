@@ -1,0 +1,9 @@
+{
+    "file": "storage/legends-en.json",
+    "list": {
+        "selection": "Select legend",
+        "allPlayedAsk": "Avez-vous déjà joué à toutes les légendes ?",
+        "contribution": "Help us to add more legends in the app!",
+        "startLegend": "Start"
+    }
+}
