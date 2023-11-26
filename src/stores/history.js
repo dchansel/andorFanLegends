@@ -24,7 +24,7 @@ export const useHistoriesStore = defineStore('history', {
 
     state: () => ({
         history: [
-            {
+            /*{
                 slug: "die-eskorte-des-knigs",
                 done: true,
                 cards: [
@@ -33,7 +33,7 @@ export const useHistoriesStore = defineStore('history', {
                         "seen": true
                     }
                 ]
-            }
+            }*/
         ]
     }),
 

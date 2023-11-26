@@ -62,9 +62,9 @@
                 <v-expansion-panels>
                     <v-expansion-panel v-for="(legend, index) in navigation.historyList" :key="index">
                         <v-expansion-panel-title>
-                            <v-icon color="error">mdi-alert-circle</v-icon>
                             {{ legend.name }}
-                            <template v-slot:actions>
+                            <!--<v-icon color="error">mdi-alert-circle</v-icon>-->
+                            <template v-slot:actions v-if="legend.done">
                                 <v-icon color="teal">mdi-check</v-icon>
                             </template>
                         </v-expansion-panel-title>

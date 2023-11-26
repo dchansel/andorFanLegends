@@ -18,9 +18,6 @@
     const currentCard = [];
     
     function handleOpenCard(slug) {
-        /*console.log(legend.value);
-        console.log(legend.value.slug);
-        console.log(slug);*/
         router.push(`/${legend.value.slug}/${slug}`);
         dialog.state = true
         //let currentCard = [];

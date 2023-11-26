@@ -59,12 +59,26 @@ export const useLegendsStore = defineStore('legends', {
 
 const loadLegends = () => {
 
-    getHistory();
+    let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
+    let history = getHistory().value;
 
-    return require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
+    legends = legends.map(legend => {
+        let doneState = history.find(i => {
+            if( i.slug === legend.slug) {
+                console.log("DONE = " + i.done);
+                return i.done;
+            }
+            return false;
+        }) || false;
+        let done =  doneState.done || false;
+        return {...legend, done: done };
+      });
+    return legends;
+    //return require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
 }
 
 function getHistory() {
     const {history} = storeToRefs(useHistoriesStore());
     console.log(history.value);
+    return history;
 }
