@@ -27,7 +27,7 @@
 
     function receiveEmit(legendName) {
         activeLegend = legendName;
-        console.log(legendName);
+        //console.log(legendName);
         //alert("toto");
     }
     /*function handleLoading() {

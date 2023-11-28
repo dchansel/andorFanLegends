@@ -12,6 +12,7 @@ export const useLegendsStore = defineStore('legends', {
     state: () => ({
         legends: loadLegends(),
         legend: null,
+        legendHistory: null
     }),
 
     // getters return data from the data store
@@ -34,15 +35,19 @@ export const useLegendsStore = defineStore('legends', {
     actions: {
         fetchLegend() {
             const route = useRoute();
-            //console.log("SLUG : " + route.params.legendSlug);
-            //console.log("FETCH" + this.$router.params.legendSlug);
             this.legend = null;
-            //this.legend = this.legends.find(i => i.slug === this.router.params.legendSlug) || false;
-            //this.legend = this.legends.find(i => i.slug === route.params.legendSlug) || false;
             this.legend = require('./../../public/legends/' + i18n.global.locale.value + "/" + route.params.legendSlug + '.json');
 
-            //Add Legend History if exist
-            getHistory();
+            this.legendHistory = getLegendHistory(this.legend.slug)
+            if (!this.legendHistory) {
+                console.log("History not exist");
+                //create&Load
+                //const store = useHistoriesStore();
+                //store.createLegendHistory(this.legend);
+                createLegendHistory(this.legend);
+            } else {
+                console.log("History exist");
+            }
             
         },
         currentLegend(){
@@ -65,7 +70,7 @@ const loadLegends = () => {
     legends = legends.map(legend => {
         let doneState = history.find(i => {
             if( i.slug === legend.slug) {
-                console.log("DONE = " + i.done);
+                //console.log("DONE = " + i.done);
                 return i.done;
             }
             return false;
@@ -79,6 +84,31 @@ const loadLegends = () => {
 
 function getHistory() {
     const {history} = storeToRefs(useHistoriesStore());
-    console.log(history.value);
+    //console.log(history.value);
     return history;
+}
+
+function getLegendHistory(slug) {
+    const store = useHistoriesStore();
+    //console.log(useHistoriesStore())
+    //const {history} = storeToRefs(store);
+    //console.log(store.legendHistory(slug));
+    return store.legendHistory(slug);
+}
+
+function createLegendHistory(legend) {
+    console.log(legend.name);
+    let history = [{
+        "name": legend.name,
+        "cards": legend.cards.map(card => {
+            return {
+                "slug": card.slug,
+                "seen": false
+            }
+        })
+            //)
+            // return {...card, seen: false };
+    }];
+    console.log(history);
+    // Add to History Store
 }

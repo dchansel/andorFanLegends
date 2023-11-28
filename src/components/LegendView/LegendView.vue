@@ -5,7 +5,7 @@
     import {useLegendsStore} from './../../stores';    
     import cardView from './CardView';
 
-    const {legend} = storeToRefs(useLegendsStore());
+    const {legend, legendHistory} = storeToRefs(useLegendsStore());
     const { fetchLegend } = useLegendsStore()
 
     fetchLegend();
@@ -19,18 +19,10 @@
     
     function handleOpenCard(slug) {
         router.push(`/${legend.value.slug}/${slug}`);
-        dialog.state = true
-        //let currentCard = [];
-        /*let currentCard = legend.value.cards.find(f => {
-            return f.slug === slug
-        });
-        console.log(currentCard);*/
+        dialog.state = true;
         this.currentCard = legend.value.cards.find(f => {
-        //let currentCard.value = legend.value.cards.find(f => {    
             return f.slug === slug
         });
-        //console.log(this.currentCard);
-        //this.$store.commit("seeCard");
     }
 
     function handleCloseCard() {
@@ -40,6 +32,16 @@
             //currentCard.value = [];
             router.go(-1);
         }
+    }
+
+    function isSeen(cardSlug) {
+        //console.log("HISTORY");
+        //console.log("CARD SLUG = " + cardSlug);
+        //console.log(this.legendHistory.cards);
+        //console.log(this.legendHistory.cards.find(i=> i.slug === cardSlug));
+        //let historyCard = this.legendHistory.cards.find(i=> i.slug === cardSlug)
+        //console.log("SEEN = " + historyCard.seen);
+        return this.legendHistory.cards.find(i=> i.slug === cardSlug).seen;
     }
 </script>
 
@@ -52,11 +54,13 @@
             :raised="!card.seen"
             size="large"
             class="cardbtn"
-            :class="{ seen: card.seen }"
+            :class="{ seen: isSeen(card.slug) }"
             @click="handleOpenCard(card.slug)"
         >
-            {{ card.name }}
+            {{ card.name }} {{legendHistory.cards.filter(i=> i.slug === card.slug).seen }}
+            <button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>
         </button>
+        
     </div>
     <hr v-if="legend.cards.filter(i => i.type ==='custom').length !== 0" class="trenner">
     <div

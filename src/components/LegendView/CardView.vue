@@ -72,7 +72,7 @@
         <div v-if="(cardData.type === 'put')" class="putcard">
           <div class="arrow"></div>
           <div class="title">{{ cardData.name }}</div>
-          <div>Diese Karte wird aufgedeckt, sobald der Erähler das Buchstabenfeld erreicht hat, auf das der Pfeil zeigt.</div>
+          <div>Révélez cette carte dès que le Narrateur atteint cette case sur la Piste des Légendes.</div>
         </div>
       </div>
       <div class="right" v-html="marked(cardData.text || '')" v-if="(cardData.type !== 'end')"></div>
