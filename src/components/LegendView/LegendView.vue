@@ -1,17 +1,19 @@
 <script setup>
-    import { reactive, defineEmits } from 'vue'; //
+    import { reactive } from 'vue'; //
     import router from './../../router';
     import {storeToRefs} from 'pinia';    
     import {useLegendsStore} from './../../stores';    
     import cardView from './CardView';
 
-    const {legend, legendHistory} = storeToRefs(useLegendsStore());
+    const {legend} = storeToRefs(useLegendsStore()); //, legendHistory
+    
     const { fetchLegend } = useLegendsStore()
 
     fetchLegend();
 
-    const emits = defineEmits(['on-add'])
-    emits('on-add', legend.value.name)
+// eslint-disable-next-line
+    const emits = defineEmits(["activeLegend"])
+    emits('activeLegend', legend.value.name)
     //emits('on-add', useLegendsStore.getters.getCurrentLegend)
 
     const dialog = reactive({state: false});
@@ -34,14 +36,14 @@
         }
     }
 
-    function isSeen(cardSlug) {
+    function isSeen() { //cardSlug
         //console.log("HISTORY");
         //console.log("CARD SLUG = " + cardSlug);
         //console.log(this.legendHistory.cards);
         //console.log(this.legendHistory.cards.find(i=> i.slug === cardSlug));
         //let historyCard = this.legendHistory.cards.find(i=> i.slug === cardSlug)
-        //console.log("SEEN = " + historyCard.seen);
-        return this.legendHistory.cards.find(i=> i.slug === cardSlug).seen;
+        //console.log("TO SEEN OK = " + cardSlug);
+        //return this.legendHistory.cards.find(i=> i.slug === cardSlug).seen;
     }
 </script>
 
@@ -57,8 +59,8 @@
             :class="{ seen: isSeen(card.slug) }"
             @click="handleOpenCard(card.slug)"
         >
-            {{ card.name }} {{legendHistory.cards.filter(i=> i.slug === card.slug).seen }}
-            <button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>
+            {{ card.name }}
+            <!--<button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>-->
         </button>
         
     </div>
@@ -86,7 +88,7 @@
         v-model="dialog.state">
         <v-card>
             <v-card-title class="justify-center">
-                <span class="text-h4" style="vertical-align:text-top">A</span>
+                <span class="text-h4" style="vertical-align:text-top">{{currentCard.name}}</span>
                 <v-btn
                     icon="mdi-close"
                     class="float-right"

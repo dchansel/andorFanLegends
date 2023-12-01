@@ -1,8 +1,8 @@
 <script setup>
-    import { computed, ref } from 'vue';
+    import { ref } from 'vue';
+    import { computed } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
-    //import LegendView from './components/LegendView/LegendView.vue';
-
+    //import {LegendView}  from './components/LegendView/LegendView.vue';
     const route = useRoute();
     const router = useRouter();
 
@@ -11,14 +11,8 @@
         return route.path === "/";
     });
 
-    /*const activeLegend = computed(() => {
-         return "tata";
-    });*/
-    let activeLegend = ref("");
-
-    /*const activeLegend = reactive(
-
-    );*/ 
+    //let activeLegend = reactive("");
+    var activeLegend= ref("");
 
     function historyBack() {
         //this.$router.go(-1);
@@ -26,10 +20,9 @@
     }
 
     function receiveEmit(legendName) {
-        activeLegend = legendName;
-        //console.log(legendName);
-        //alert("toto");
-    }
+        //console.log("EMIT = " + legendName);
+        activeLegend.value = legendName;
+      }
     /*function handleLoading() {
         this.$store.dispatch("loadLegenden");
     }
@@ -76,12 +69,12 @@
                     v-if="mainpage" 
                     alt style="max-height: 100%">
                 <div
-                    v-if="!mainpage">{{ activeLegend }}
+                    v-if="!mainpage">{{activeLegend}}
                 </div>
             </v-app-bar>
         </v-container>
         <v-main class="d-flex justify-center" style="min-height: 300px;"><!--align-center -->
-            <router-view @on-add="receiveEmit"></router-view>
+            <router-view @activeLegend="receiveEmit"></router-view>
         </v-main>
     </v-app>
 </template>
