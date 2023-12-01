@@ -1,15 +1,17 @@
 <script setup>
     import router from './../../router';
+    //import { useRoute} from 'vue-router';
     //import { storeToRefs } from 'pinia'
     import {useLegendsStore} from './../../stores';
     import {reactive, computed} from 'vue';
 
+    //const route = useRoute();
     const store = useLegendsStore();
     //store.$i18n = i18n.locale;
     //const legends = storeToRefs(store);
-    const navigation = reactive({
+    let navigation = reactive({
         page: 1,
-        pageSize: 5,
+        pageSize: 1,
         //list: [], //[]
         listCount: 0,
         historyList: []
@@ -19,17 +21,29 @@
     //updatePage();
 
     function initPage() {
+        //console.log("INIT PAGE = " + route.query.page);
         navigation.listCount = store.legends.length;
-        if (navigation.listCount < navigation.pageSize) {
-            navigation.historyList = store.legends;
-        } else {
-            navigation.historyList = store.legends.slice(0, navigation.pageSize);
-        }
+        /*if (route.query.page && route.query.page !=1) {
+            navigation.page = route.query.page;
+            updatePage(route.query.page);
+        } else {*/
+            //navigation.listCount = store.legends.length;
+            if (navigation.listCount < navigation.pageSize) {
+                navigation.historyList = store.legends;
+            } else {
+                navigation.historyList = store.legends.slice(0, navigation.pageSize);
+            }
+        //}
+        //console.log(navigation);
     }
 
     // a computed ref
     const pages = computed(() => {
-        if (navigation.pageSize == null || navigation.listCount == null) return 0;
+        if (navigation.pageSize == null || navigation.listCount == null) {
+            //console.log( "IF");
+            return 0;
+        }
+        //console.log("PAGES (count & size)= " + navigation.listCount  + "-" + navigation.pageSize )
         return Math.ceil(navigation.listCount / navigation.pageSize);
     })
 
@@ -38,6 +52,14 @@
         let _end = pageIndex * navigation.pageSize;
         navigation.historyList = store.legends.slice(_start, _end);
         navigation.page = pageIndex;
+        
+        //console.log("NEW " + pageIndex);
+        //console.log("ACTUEL" + route.query.page);
+
+        //router.replace({ query: { ...route.query, page } })
+        router.replace({ query: { page: pageIndex } })
+        //router.push({ path: 'register', query: { plan: 'private' }})
+        //console.log(navigation);
     }
 
     // METHODS 
