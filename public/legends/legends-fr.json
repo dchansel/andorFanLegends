@@ -1,1 +1,110 @@
-[{"name":"Isor, le Roi des Gors","slug":"isor-le-roi-des-gors","file":"isor-le-roi-des-gors.json","author":"Noah","abstract":"Une attaque contre Andor se prépare. A sa tête, Isor, proclamé Roi des Gors. Il rassemble des forces pour submerger Andor.","year":"2014","difficulty":[1],"board":[1],"boxExt":[1]},{"name":"Le Brouillard de l'Horreur","slug":"le-brouillard-de-lhorreur","file":"le-brouillard-de-lhorreur.json","author":"Norman, Martina","abstract":"Un brouillard plus sombre et plus dense que tout brouillard se répand sur les terres orientales, abritant en son sein d'obscures créatures, et forçant les paysans à fuir\net chercher refuge à Chaumebourg. Avec l'apparition du Brouillard, les nouvelles des nains de la Mine se sont taries, et l'accès à la Mine est verrouillé.","year":"2014","difficulty":[1,2],"board":[1],"boxExt":[1]},{"name":"Le Mystère des Feux-Follets","slug":"le-mystere-des-feux-follets","file":"le-mystere-des-feux-follets.json","author":"Philipp","abstract":"Une ancienne prophétie rapporte que de mystérieux feux follets sont la clé menant à la tour abandonnée tant chantée et à la légendaire Émeraude de Nehal. Mais les Héros se perdent dans des querelles et des disputes. Et les Créatures y trouvent toute latitude pour avancer sur Chaumebourg...","year":"2014","difficulty":[1,2],"board":[1],"boxExt":[1,8]},{"name":"Le Sauvetage du Héros","slug":"le-sauvetage-du-heros","file":"le-sauvetage-du-heros.json","author":"Andoriana","abstract":"Un des Héros a été kidnappé. Seuls les Gardiens de l'Arbre des Chants savaient où le Héros était séquestré, ainsi que la manière de s'y rendre.\nLa tâche des Héros était de sauver le Héros kidnappé.","year":"2014","difficulty":[2],"board":[1],"boxExt":[1]},{"name":"Les Ailes de la Mort","slug":"les-ailes-de-la-mort","file":"les-ailes-de-la-mort.json","author":"Arnaud Lecomte","abstract":"Des rumeurs circulant autour de nouvelles manigances de Varkur, le Sombre Mage, inquiétaient le Roi Brandur.\nSon fils héritier, le Prince Thorald, s'était lancé sur la piste du traitre. Mais depuis 2 jours, le royaume d'Andor n'avait plus de nouvelles de celui-ci.","year":"2013","difficulty":[2],"board":[1],"boxExt":[1,9,10]},{"name":"Les Bois Ardents","slug":"les-bois-ardents","file":"les-bois-ardents.json","author":"Unses","abstract":"Les Gardiens ne quittaient que rarement le Bois de la Vigilance. Alors que les Héros étaient encore en train de construire de nouvelles défenses pour Chaumebourg avec le Prince Thorald, de terribles nouvelles leur parvinrent : Le sort du Bois de la Vigilance était désormais entre les mains des Héros...","year":"2014","difficulty":[1],"board":[1],"boxExt":[1,8]}]
+[
+    {
+        "name": "Le Brouillard de l'Horreur",
+        "slug": "le-brouillard-de-lhorreur",
+        "file": "le-brouillard-de-lhorreur.json",
+        "author": "Norman, Martina",
+        "abstract": "Un brouillard plus sombre et plus dense que tout brouillard se répand sur les terres orientales, abritant en son sein d'obscures créatures, et forçant les paysans à fuir\net chercher refuge à Chaumebourg. Avec l'apparition du Brouillard, les nouvelles des nains de la Mine se sont taries, et l'accès à la Mine est verrouillé.",
+        "year": "2014",
+        "difficulty": [
+            1,
+            2
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1
+        ]
+    },
+    {
+        "name": "Le Mystère des Feux-Follets",
+        "slug": "le-mystere-des-feux-follets",
+        "file": "le-mystere-des-feux-follets.json",
+        "author": "Philipp",
+        "abstract": "Une ancienne prophétie rapporte que de mystérieux feux follets sont la clé menant à la tour abandonnée tant chantée et à la légendaire Émeraude de Nehal. Mais les Héros se perdent dans des querelles et des disputes. Et les Créatures y trouvent toute latitude pour avancer sur Chaumebourg...",
+        "year": "2014",
+        "difficulty": [
+            1,
+            2
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1,
+            8
+        ]
+    },
+    {
+        "name": "Le Sauvetage du Héros",
+        "slug": "le-sauvetage-du-heros",
+        "file": "le-sauvetage-du-heros.json",
+        "author": "Andoriana",
+        "abstract": "Un des Héros a été kidnappé. Seuls les Gardiens de l'Arbre des Chants savaient où le Héros était séquestré, ainsi que la manière de s'y rendre.\nLa tâche des Héros était de sauver le Héros kidnappé.",
+        "year": "2014",
+        "difficulty": [
+            2
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1
+        ]
+    },
+    {
+        "name": "Les Ailes de la Mort",
+        "slug": "les-ailes-de-la-mort",
+        "file": "les-ailes-de-la-mort.json",
+        "author": "Arnaud Lecomte",
+        "abstract": "Des rumeurs circulant autour de nouvelles manigances de Varkur, le Sombre Mage, inquiétaient le Roi Brandur.\nSon fils héritier, le Prince Thorald, s'était lancé sur la piste du traitre. Mais depuis 2 jours, le royaume d'Andor n'avait plus de nouvelles de celui-ci.",
+        "year": "2013",
+        "difficulty": [
+            2
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1,
+            9,
+            10
+        ]
+    },
+    {
+        "name": "Les Bois Ardents",
+        "slug": "les-bois-ardents",
+        "file": "les-bois-ardents.json",
+        "author": "Unses",
+        "abstract": "Les Gardiens ne quittaient que rarement le Bois de la Vigilance. Alors que les Héros étaient encore en train de construire de nouvelles défenses pour Chaumebourg avec le Prince Thorald, de terribles nouvelles leur parvinrent : Le sort du Bois de la Vigilance était désormais entre les mains des Héros...",
+        "year": "2014",
+        "difficulty": [
+            1
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1,
+            8
+        ]
+    },
+    {
+        "name": "Isor, le Roi des Gors",
+        "slug": "isor-le-roi-des-gors",
+        "file": "isor-le-roi-des-gors.json",
+        "author": "Noah",
+        "abstract": "Une attaque contre Andor se prépare. A sa tête, Isor, proclamé Roi des Gors. Il rassemble des forces pour submerger Andor.",
+        "year": "2014",
+        "difficulty": [
+            1
+        ],
+        "board": [
+            1
+        ],
+        "boxExt": [
+            1
+        ]
+    }
+]
