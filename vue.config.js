@@ -8,5 +8,21 @@ module.exports = defineConfig({
         msTileImage: 'img/icons/mstile-150x150.png'
     
     }
+  },
+  devServer: {
+    client: {
+      overlay: {
+        runtimeErrors: (error) => {
+          const ignoreErrors = [
+            "ResizeObserver loop limit exceeded",
+            "ResizeObserver loop completed with undelivered notifications.",
+          ];
+          if (ignoreErrors.includes(error.message)) {
+            return false;
+          }
+          return true;
+        },
+      },
+    }
   }
 })
