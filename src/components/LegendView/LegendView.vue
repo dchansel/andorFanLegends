@@ -1,5 +1,5 @@
 <script setup>
-    import { reactive } from 'vue'; //
+    import { reactive,defineEmits } from 'vue'; //
     import router from './../../router';
     import {storeToRefs} from 'pinia';    
     import {useLegendsStore} from './../../stores';    
@@ -11,10 +11,8 @@
 
     fetchLegend();
 
-// eslint-disable-next-line
     const emits = defineEmits(["activeLegend"])
     emits('activeLegend', legend.value.name)
-    //emits('on-add', useLegendsStore.getters.getCurrentLegend)
 
     const dialog = reactive({state: false});
     const currentCard = [];

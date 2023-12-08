@@ -6,7 +6,4 @@ export default {
     yearOptions: yearOptions,
     boardOptions: boardOptions,
     difficultiesOptions: difficultiesOptions
-    /*CARRIER: CARRIER,
-    COLLATION: COLLATION,
-    CASH_AND_CARRY: CASH_AND_CARRY*/
   }

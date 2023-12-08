@@ -85,7 +85,6 @@ export const useLegendsStore = defineStore('legends', {
             let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
             let history = getHistory().value;
         
-            //console.log(this.filtering);
             // FILTERING
             let filter = this.filtering;
             legends = legends.filter(function (n) { // YEARS
@@ -93,7 +92,6 @@ export const useLegendsStore = defineStore('legends', {
             });
             //console.log(legends);
             legends = legends.filter(function (n) { // DIFFICULTY
-                //console.log(n.difficulty + '-' + n.difficulty.map(String).some(difficultyOne => filter.difficulty.includes(difficultyOne)));
                 return n.difficulty.map(String).some(difficultyOne => filter.difficulty.includes(difficultyOne));
             });
         
@@ -114,18 +112,10 @@ export const useLegendsStore = defineStore('legends', {
     },
 })
 
-const loadLegends = (state) => {
+/*const loadLegends = (state) => {
 
     let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
     let history = getHistory().value;
-
-/*    let filter = this.filtering;
-    legends = legends.filter(function (n) {
-        //console.log(filter);
-        //return filter.year.includes(n.year);
-        return filter.year.includes('2014'); 
-        //return n.year==='2014';
-    });*/
 
     // get history
     legends = legends.map(legend => {
@@ -140,11 +130,10 @@ const loadLegends = (state) => {
         return {...legend, done: done };
       });
     return legends;
-}
+}*/
 
 function getHistory() {
     const {history} = storeToRefs(useHistoriesStore());
-    //console.log(history.value);
     return history;
 }
 

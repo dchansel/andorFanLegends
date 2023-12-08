@@ -2,7 +2,7 @@
     import { ref } from 'vue';
     import { computed } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
-    //import {LegendView}  from './components/LegendView/LegendView.vue';
+
     const route = useRoute();
     const router = useRouter();
 
@@ -10,12 +10,6 @@
         //return this.$route.path === "/";
         return route.path === "/";
     });
-    /*const filterpage = computed(() => {
-        //return this.$route.path === "/";
-        return route.path === "/filter";
-    });*/
-
-    //let activeLegend = reactive("");
     
     function historyBack() {
         //this.$router.go(-1);
@@ -24,8 +18,8 @@
 
     var activeLegend= ref("");
     function receiveEmit(legendName) {
-            activeLegend.value = legendName;
-      }
+        activeLegend.value = legendName;
+    }
 
 
     /*function handleLoading() {
@@ -37,7 +31,6 @@
     function dismissMessage() {
         this.$store.commit("clearMessage");
     }*/
-
 </script>
 
 <template>
@@ -83,7 +76,6 @@
         </v-main>
     </v-app>
 </template>
-
 
 <style>
 </style>

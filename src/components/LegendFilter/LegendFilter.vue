@@ -15,12 +15,11 @@
     const store = useLegendsStore();
     let selected = reactive(store.filtering);
     watch(selected, () => {
-        //console.log("change");
         store.legends = store.loadLegends2();
     });
 
+    // TODO : Delete route and historyback and place result button in main APP.vue ????
     function historyBack() {
-        //this.$router.go(-1);
         router.go(-1);
     }
 </script>
@@ -100,9 +99,9 @@
             <p class="text-h5">Nombre de héros</p>
 
             In app : {{selected.inApp}} - onlyPrintable {{ selected.onlyPrintable }}
-            <span>difficulté selectionnée : {{selected.difficulty}}</span>
+            <!--<span>difficulté selectionnée : {{selected.difficulty}}</span>
+            <span>Année selectionnée : {{selected.year}}</span>-->
             <span>Plateau selectionnée : {{selected.board}}</span>
-            <span>Année selectionnée : {{selected.year}}</span>
             </v-col>
         </v-row>
         <v-bottom-navigation active>

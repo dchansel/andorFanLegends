@@ -77,7 +77,6 @@
         store.filtering.year = options.yearOptions;
         store.legends = store.loadLegends2();
         initPage();
-        //updatePage()
     }
 
     function showDifficulty() {
@@ -87,11 +86,9 @@
         return true;
     }
     function resetDifficulty() {
-        //store.filtering.Difficulty = options.DifficultyOptions;
         store.filtering.difficulty = options.difficultiesOptions.map(n => {return n.key})
         store.legends = store.loadLegends2();
         initPage();
-        //updatePage()
     }
 </script>
 
