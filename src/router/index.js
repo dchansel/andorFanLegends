@@ -18,6 +18,7 @@ const router = createRouter({
         },
         {
             path: '/:legendSlug/:cardSlug?',
+            name:"legend",
             component: LegendView
         }
         /*{

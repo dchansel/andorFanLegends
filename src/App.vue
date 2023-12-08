@@ -10,19 +10,24 @@
         //return this.$route.path === "/";
         return route.path === "/";
     });
+    /*const filterpage = computed(() => {
+        //return this.$route.path === "/";
+        return route.path === "/filter";
+    });*/
 
     //let activeLegend = reactive("");
-    var activeLegend= ref("");
-
+    
     function historyBack() {
         //this.$router.go(-1);
         router.go(-1);
     }
 
+    var activeLegend= ref("");
     function receiveEmit(legendName) {
-        //console.log("EMIT = " + legendName);
-        activeLegend.value = legendName;
+            activeLegend.value = legendName;
       }
+
+
     /*function handleLoading() {
         this.$store.dispatch("loadLegenden");
     }
