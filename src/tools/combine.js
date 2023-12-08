@@ -22,7 +22,9 @@ files.forEach( function (file) {
             players: obj.player,
             difficulty: obj.difficulty,
             board: obj.board,
-            boxExt: obj.boxExt
+            boxExt: obj.boxExt,
+            cardsCount: obj.cards.length,
+            download: obj.download
         };
         legendList.push(shortLegend);
     }
