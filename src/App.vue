@@ -36,7 +36,7 @@
 <template>
     <v-app>
         <v-container class="py-0">
-            <v-app-bar :elevation="2">
+            <v-app-bar class="v-theme--dark" :elevation="2">
                 <div id="back">
                     <v-btn density="default" icon="mdi-keyboard-backspace"
                         v-show="!mainpage"
@@ -78,4 +78,7 @@
 </template>
 
 <style>
+.v-toolbar__content{
+    background: #5f5f5f; 
+}
 </style>

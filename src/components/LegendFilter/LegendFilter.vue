@@ -31,14 +31,14 @@
             <v-col >
                 <p class="text-h5">Disponibilité des Légendes</p>
                 <v-switch
-                    color="primary"
+                    color="light-green-darken-4"
                     label="Jouable dans l'application"
                     v-model="selected.inApp"
                     name="inApp"
                     hide-details
                     ></v-switch>
                     <div v-show="selected.inApp" style="margin:-25px 30px"><v-switch
-                        color="primary"
+                        color="light-green-darken-4"
                         v-model="selected.withPrintableElement"
                         name="withPrintableElement"
                         label="Avec Elements imprimables"
@@ -46,7 +46,7 @@
                         ></v-switch>
                     </div>
                 <v-switch
-                    color="primary"
+                    color="light-green-darken-4"
                     v-model="selected.onlyPrintable"
                     name="onlyPrintable"
                     label="A imprimer uniquement"
@@ -55,7 +55,7 @@
                 <p class="text-h5">Difficulté</p>
                 <v-chip-group
                     v-model="selected.difficulty"
-                    selected-class="bg-blue-accent-3"
+                    selected-class="bg-light-green-darken-4"
                     column multiple>
                     <v-chip
                         color="grey-lighten-3"
@@ -70,7 +70,7 @@
                 <p class="text-h5">Plateau</p>
                 <v-chip-group
                     v-model="selected.board"
-                    selected-class="bg-blue-accent-3"
+                    selected-class="bg-light-green-darken-4"
                     column multiple>
                     <v-chip
                         color="grey-lighten-3"
@@ -85,7 +85,7 @@
                 <p class="text-h5">Année de publication</p>
                 <v-chip-group
                     v-model="selected.year"
-                    selected-class="bg-blue-accent-3"
+                    selected-class="bg-light-green-darken-4"
                     column multiple>
                     <v-chip
                         color="grey-lighten-3"
@@ -100,8 +100,9 @@
 
             In app : {{selected.inApp}} - onlyPrintable {{ selected.onlyPrintable }}
             <!--<span>difficulté selectionnée : {{selected.difficulty}}</span>
-            <span>Année selectionnée : {{selected.year}}</span>-->
+            <span>Année selectionnée : {{selected.year}}</span>
             <span>Plateau selectionnée : {{selected.board}}</span>
+            -->
             </v-col>
         </v-row>
         <v-bottom-navigation active>
