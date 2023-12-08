@@ -49,6 +49,38 @@
 <div>
     <div style="display: flex; flex-wrap: wrap;">
         <button
+            v-for="card in legend.cards.filter(i => i.type ==='instruction')"
+            :key="card.name"
+            :raised="!card.seen"
+            size="large"
+            class="cardbtn customcard instructionCardHolder"
+            :class="{ seen: isSeen(card.slug) }"
+            @click="handleOpenCard(card.slug)"
+        >
+        <div class="instructionTitle"><b>{{ card.name }}</b></div>
+            <!--<button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>-->
+        </button>  
+    </div>
+    <!--<div 
+        v-for="card in legend.cards.filter(i => i.type === 'instruction')"
+        :key="card.name"
+        class="instructionCardHolder">
+        <button
+            align="end" 
+            :raised="!card.seen"
+            size="large"
+            :type="card.seen ? 'primary': 'secondary'"
+            class="cardbtn customcard"
+            :class="{ seen: card.seen }"
+            @click="handleOpenCard(card.slug)"
+            >
+            {{ card.name }}
+        </button>
+        <div class="instructionTitle" style="padding-right: 15px;"><b>{{ card.name }}</b><br/>{{ card.subname }}</div>
+    </div>-->
+    <hr v-if="legend.cards.filter(i => i.type ==='instruction').length !== 0" class="trenner">
+    <div style="display: flex; flex-wrap: wrap;">
+        <button
             v-for="card in legend.cards.filter(i => i.type ==='letter' || i.type === 'end')"
             :key="card.name"
             :raised="!card.seen"
@@ -59,8 +91,7 @@
         >
             {{ card.name }}
             <!--<button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>-->
-        </button>
-        
+        </button>  
     </div>
     <hr v-if="legend.cards.filter(i => i.type ==='custom').length !== 0" class="trenner">
     <div
@@ -140,6 +171,15 @@
 .customCardHolder {
   display: flex;
   align-items: center;
+}
+
+.instructionCardHolder {
+    float:left;
+    width:20%;
+}
+
+.instructionTitle {
+    padding:0 10px;
 }
 
 .cardModal :deep(.ui-modal__body) {
