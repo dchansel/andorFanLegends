@@ -12,7 +12,7 @@
     
     let navigation = reactive({
         page: 1,
-        pageSize: 10,
+        pageSize: 6,
         //list: [], //[]
         listCount: 0,
         historyList: []
@@ -138,14 +138,20 @@
                     <v-expansion-panel v-for="(legend, index) in navigation.historyList" :key="index">
                         <v-expansion-panel-title>
                             {{ legend.name }}
-                            <!--<v-icon color="error">mdi-alert-circle</v-icon>-->
+                            <v-icon v-if="legend.cardsCount==0" class="only-download" color="red-darken-2" icon="mdi-link"></v-icon>
                             <template v-slot:actions v-if="legend.done">
                                 <v-icon color="teal">mdi-check</v-icon>
                             </template>
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
                             {{ legend.abstract }}
+                            <v-btn 
+                                v-if="legend.cardsCount==0"
+                                :href="legend.download" 
+                                density="comfortable" class="float-right rounded mt-3">
+                                {{ $t("list.downloadLegend") }}</v-btn>
                             <v-btn
+                                v-if="legend.cardsCount>0"
                                 @click="changeLegend(legend.slug)" 
                                 density="comfortable" class="float-right rounded mt-3">
                                 {{ $t("list.startLegend") }}</v-btn>
@@ -157,3 +163,9 @@
         </v-row>
     </v-container>
 </template>
+
+<style>
+.only-download {
+    margin: 0 10px;
+}
+</style>
