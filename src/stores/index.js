@@ -18,7 +18,7 @@ export const useLegendsStore = defineStore('legends', {
             withPrintableElement: true,
             onlyPrintable: true,
             difficulty: options.difficultiesOptions.map(n => {return n.key}), // Object.keys(options.difficultiesOptions) //[1,2,3]
-            board: [1,2,3,4,5,6,7,8],
+            board: options.boardOptions.map(n => {return n.key}),
             year: options.yearOptions,
         }
     }),
@@ -33,16 +33,27 @@ export const useLegendsStore = defineStore('legends', {
         },
         getSelectedYear(state) {
             if(state.filtering.year.length == 1) {
-                return state.filtering.year;
+                return state.filtering.year[0];
             } else {
                 return "Années (" + state.filtering.year.length + ")"
             }
         },
         getSelectedDifficulty(state) {
             if(state.filtering.difficulty.length == 1) {
-                return state.filtering.difficulty;
+                return options.difficultiesOptions.filter(item => item['key'] == state.filtering.difficulty)[0].name;
             } else {
                 return "Difficulté (" + state.filtering.difficulty.length + ")"
+            }
+        },
+        getSelectedBoard(state) {
+            if(state.filtering.board.length == 1) {
+                //options.boardOptions.filter()
+                //let oneboard = options.boardOptions.filter(item => item['key'] == state.filtering.board)[0]; 
+                //console.log(oneboard.name);
+                //console.log(options.boardOptions.filter(item => item['key'] == state.filtering.board));
+                return options.boardOptions.filter(item => item['key'] == state.filtering.board)[0].name;
+            } else {
+                return "Plateau (" + state.filtering.board.length + ")"
             }
         }
         /*currentLegend: (state) => {
@@ -93,6 +104,9 @@ export const useLegendsStore = defineStore('legends', {
             //console.log(legends);
             legends = legends.filter(function (n) { // DIFFICULTY
                 return n.difficulty.map(String).some(difficultyOne => filter.difficulty.includes(difficultyOne));
+            });
+            legends = legends.filter(function (n) { // BOARD
+                return n.board.map(String).some(boardOne => filter.board.includes(boardOne));
             });
         
             // get history

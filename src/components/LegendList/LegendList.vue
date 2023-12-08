@@ -90,6 +90,18 @@
         store.legends = store.loadLegends2();
         initPage();
     }
+
+    function showBoard() {
+        if(store.filtering.board.length == options.boardOptions.length) {
+            return false;
+        }
+        return true;
+    }
+    function resetBoard() {
+        store.filtering.board = options.boardOptions.map(n => {return n.key})
+        store.legends = store.loadLegends2();
+        initPage();
+    }
 </script>
 
 <template>
@@ -104,6 +116,13 @@
                 closable
                 @click:close="resetDifficulty()">
                 {{store.getSelectedDifficulty}}
+            </v-chip>
+            <v-chip
+                v-show="showBoard()"
+                class="ma-2"
+                closable
+                @click:close="resetBoard()">
+                {{store.getSelectedBoard}}
             </v-chip>
             <v-chip
                 v-show="showYear()"
