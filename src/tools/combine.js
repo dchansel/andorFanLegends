@@ -32,7 +32,7 @@ const today = new Date();
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1;
 let dd = today.getDate();
-fs.writeFile(__dirname + "../../../public/legends/legends-fr." + yyyy+mm+dd + ".json", JSON.stringify(legendList), err => {
+fs.writeFile(__dirname + "../../../public/legends/legends-fr" + ".json", JSON.stringify(legendList), err => { //yyyy+mm+dd +
     if (err) {
       console.error(err);
     }
