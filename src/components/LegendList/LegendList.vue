@@ -102,6 +102,20 @@
         store.legends = store.loadLegends2();
         initPage();
     }
+
+    function showAvailability() {
+        if (store.getSelectedAvailability == null) {
+            return false;
+        }
+        return true;
+    }
+    function resetAvailability() {
+        store.filtering.inApp = true;
+        store.filtering.onlyPrintable = true;
+        store.filtering.withPrintableElement = true;
+        store.legends = store.loadLegends2();
+        initPage();
+    }
 </script>
 
 <template>
@@ -110,6 +124,13 @@
             <v-col md="12">
                 <v-btn prepend-icon="mdi-filter-variant" size="small" @click="handleFilter">{{$t("list.filter")}}</v-btn>
             </v-col>
+            <v-chip
+                v-show="showAvailability()"
+                class="ma-2"
+                closable
+                @click:close="resetAvailability()">
+                {{store.getSelectedAvailability}}
+            </v-chip>
             <v-chip
                 v-show="showDifficulty()"
                 class="ma-2"

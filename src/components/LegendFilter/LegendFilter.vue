@@ -95,11 +95,11 @@
                         {{ year }}
                     </v-chip>
                 </v-chip-group>
-                
+            <!--    
             <p class="text-h5">Nombre de héros</p>
-
+            
             In app : {{selected.inApp}} - onlyPrintable {{ selected.onlyPrintable }}
-            <!--<span>difficulté selectionnée : {{selected.difficulty}}</span>
+            <span>difficulté selectionnée : {{selected.difficulty}}</span>
             <span>Année selectionnée : {{selected.year}}</span>
             <span>Plateau selectionnée : {{selected.board}}</span>
             -->
@@ -117,6 +117,11 @@
 .page {
     margin: 2rem;
 }
+
+.text-h5{
+    margin:15px 0 0 0;
+}
+
 .v-bottom-navigation .v-bottom-navigation__content > .v-btn {
     max-width: 100%;
 }

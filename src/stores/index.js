@@ -46,15 +46,26 @@ export const useLegendsStore = defineStore('legends', {
             }
         },
         getSelectedBoard(state) {
-            if(state.filtering.board.length == 1) {
-                //options.boardOptions.filter()
-                //let oneboard = options.boardOptions.filter(item => item['key'] == state.filtering.board)[0]; 
-                //console.log(oneboard.name);
-                //console.log(options.boardOptions.filter(item => item['key'] == state.filtering.board));
+            if (state.filtering.board.length == 1) {
                 return options.boardOptions.filter(item => item['key'] == state.filtering.board)[0].name;
             } else {
                 return "Plateau (" + state.filtering.board.length + ")"
             }
+        },
+        getSelectedAvailability(state) {
+            if (!state.filtering.withPrintableElement && !state.filtering.onlyPrintable) {
+                return "Not additional print";
+            }
+            if (state.filtering.inApp &&  !state.filtering.onlyPrintable) {
+                return "In-App";    
+            }
+            if (state.filtering.onlyPrintable && !state.filtering.inApp) {
+                return  "Only PnP";
+            }
+            if (state.filtering.inApp &&  state.filtering.onlyPrintable) {
+                return null;    
+            }
+            return "No legends";
         }
         /*currentLegend: (state) => {
             console.log(router.params.legendSlug)
@@ -108,6 +119,23 @@ export const useLegendsStore = defineStore('legends', {
             legends = legends.filter(function (n) { // BOARD
                 return n.board.map(String).some(boardOne => filter.board.includes(boardOne));
             });
+            legends = legends.filter(function (n) { // Only Printable False
+                if( filter.inApp && filter.onlyPrintable && filter.withPrintableElement) { //ALL
+                    return true;
+                }
+                if( filter.inApp && filter.onlyPrintable ) { //ALL
+                    return true;
+                }
+                if ( (filter.inApp && !filter.onlyPrintable) && n.cardsCount > 0) { // "In-App";
+                    //console.log("in app");
+                    return true;
+                }
+                if (filter.onlyPrintable && !filter.inApp && n.cardsCount == 0) { //"Only PnP"
+                    //console.log("only pnp");
+                    return  true;
+                }
+                return false;
+            });
         
             // get history
             legends = legends.map(legend => {
@@ -121,6 +149,7 @@ export const useLegendsStore = defineStore('legends', {
                 let done =  doneState.done || false;
                 return {...legend, done: done };
               });
+            
             return legends;
         }
     },
