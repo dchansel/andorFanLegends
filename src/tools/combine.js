@@ -16,7 +16,7 @@ var files = fs.readdirSync(__dirname + "../../../public/legends/" + locale + "/"
 legendList = [];
 count = 0;
 files.forEach( function (file) {
-    if( file != "_legende-vierge.json" ) {
+    if( file != "_legende-vierge.json" && file != "additional-pdf" ) {
         
         var obj = require(__dirname + "../../../public/legends/" + locale + "/" + file);
         console.log( obj.name);
@@ -28,11 +28,12 @@ files.forEach( function (file) {
             author: obj.author,
             abstract: obj.abstract,
             year: obj.year,
-            players: obj.player,
+            players: obj.players,
             difficulty: obj.difficulty,
             board: obj.board,
             boxExt: obj.boxExt,
-            cardsCount: obj.cards.length,
+            cardsCount: cardsCount(obj),
+            additional: obj.additionaldownload,
             download: obj.download
         };
         legendList.push(shortLegend);
@@ -40,6 +41,14 @@ files.forEach( function (file) {
         count++;
     }
 });
+
+function cardsCount(obj){
+    if(obj.cards) {
+        return obj.cards.length;
+    } else {
+        return 0;
+    }
+}
 
 const today = new Date();
 const yyyy = today.getFullYear();
