@@ -62,9 +62,13 @@ export const useLegendsStore = defineStore('legends', {
             if (state.filtering.onlyPrintable && !state.filtering.inApp) {
                 return  "Only PnP";
             }
+            if (!state.filtering.withPrintableElement) {
+                return "Not additional print";
+            }
             if (state.filtering.inApp &&  state.filtering.onlyPrintable) {
                 return null;    
             }
+            
             return "No legends";
         }
         /*currentLegend: (state) => {
@@ -136,6 +140,13 @@ export const useLegendsStore = defineStore('legends', {
                 }
                 return false;
             });
+            legends = legends.filter(function (n) { // Printable Element
+                if ( !filter.withPrintableElement && ( n.hasOwnProperty("additional")  && n.additional != "") ) { 
+                    return false;
+                }
+                return true;
+            });
+            
         
             // get history
             legends = legends.map(legend => {
@@ -186,7 +197,7 @@ function getLegendHistory(slug) {
 }
 
 function createLegendHistory(legend) {
-    console.log("1-" + legend.name);
+    //console.log("1-" + legend.name);
     let history = {
         "name": legend.name,
         "slug": legend.slug,
@@ -197,7 +208,7 @@ function createLegendHistory(legend) {
             }
         })
     };
-    console.log(history);
+    //console.log(history);
     // Add to History Store
     const store = useHistoriesStore();
     store.addHistory(history);
