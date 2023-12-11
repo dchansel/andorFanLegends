@@ -22,6 +22,9 @@ const instance = createI18n({
 export default instance
 
 function getUserLocal() {
+    //console.log("ENVIRONNEMENT" + process.env.VUE_APP_TITLE)
+    //return 'de';
+    /* eslint-disable */
     if (availableLocalesList.includes(window.navigator.language)) {
         return window.navigator.language;
     } else {
