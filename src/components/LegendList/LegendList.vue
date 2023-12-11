@@ -12,7 +12,7 @@
     
     let navigation = reactive({
         page: 1,
-        pageSize: 6,
+        pageSize: 15,
         //list: [], //[]
         listCount: 0,
         historyList: []
@@ -116,6 +116,11 @@
         store.legends = store.loadLegends2();
         initPage();
     }
+
+    function downloadAdditional (additionalUrl) {
+        const url = '/legends/fr/additional-pdf/' + additionalUrl;
+        window.location.href = url;
+    }
 </script>
 
 <template>
@@ -165,17 +170,50 @@
                             </template>
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
-                            {{ legend.abstract }}
-                            <v-btn 
-                                v-if="legend.cardsCount==0"
-                                :href="legend.download" 
-                                density="comfortable" class="float-right rounded mt-3">
-                                {{ $t("list.downloadLegend") }}</v-btn>
-                            <v-btn
-                                v-if="legend.cardsCount>0"
-                                @click="changeLegend(legend.slug)" 
-                                density="comfortable" class="float-right rounded mt-3">
-                                {{ $t("list.startLegend") }}</v-btn>
+                            {{ legend.abstract }} <em>Created by {{ legend.author }} ({{ legend.year }})</em>
+                            <v-row class="details" justify="center">
+                                <v-col class="features" sm="9"  justify="center">
+                                    <v-chip size="small" >
+                                        <!--{{ legend.difficulty}}-->
+                                        {{ legend.difficulty.map((diff) => { 
+                                            //console.log(diff); 
+                                            return options.difficultiesOptions.filter(item => {return item['key'] == diff} )[0].name
+                                        }).join(' - ') }}
+                                    </v-chip>
+                                    <v-chip size="small" >
+                                        {{ legend.board.map((boardOne) => { 
+                                            //console.log(diff); 
+                                            return options.boardOptions.filter(item => {return item['key'] == boardOne} )[0].name
+                                        }).join(' - ') }}
+                                        <!--{{ legend.board }}-->
+                                    </v-chip>
+                                    <v-chip size="small">
+                                        {{ legend.players }} joueurs
+                                        <!--{{ legend.board }}-->
+                                    </v-chip>
+                                    <v-chip size="small" class="bg-red-accent-3"
+                                        download
+                                        @click="downloadAdditional(legend.additional)"
+                                        v-if="legend.additional">
+                                        Contenu PnP
+                                    </v-chip>
+                                    
+                                </v-col>
+                                <v-col class="launch" sm="3" align="center" justify="center">
+                                        <v-btn 
+                                            v-if="legend.cardsCount==0"
+                                            :href="legend.download" 
+                                            density="comfortable" class="bg-orange-darken-4 float-right rounded mt-3">
+                                            {{ $t("list.downloadLegend") }}</v-btn>
+                                        <v-btn 
+                                            v-if="legend.cardsCount>0"
+                                            @click="changeLegend(legend.slug)" 
+                                            density="comfortable" class="bg-orange-darken-4 float-right rounded mt-3">
+                                            {{ $t("list.startLegend") }}</v-btn>
+                                </v-col>
+                            </v-row>
+                            
+                            
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                     <v-pagination class="pagination mb-2" v-model="navigation.page" :length="pages" @update:modelValue="updatePage"></v-pagination>
@@ -186,6 +224,15 @@
 </template>
 
 <style>
+.v-expansion-panel-text__wrapper{
+    /*padding: 10px 10px 0px;*/
+    font-size: 0.9em;
+}
+.details{margin-top:0px;}
+.features .v-chip{margin-right:10px;}
+.launch .v-btn {
+    margin:0px !important;
+}
 .only-download {
     margin: 0 10px;
 }
