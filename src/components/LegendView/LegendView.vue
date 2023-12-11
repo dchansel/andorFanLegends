@@ -47,6 +47,14 @@
 
 <template>
 <div>
+    <div v-if="legend.additionaldownload" style="display: flex; flex-wrap: wrap;">
+        <v-alert
+            type="warning"
+            closable 
+            text="Du contenu complémentaire est à imprimer (ou reproduire) avant de débuter la partie"
+        ></v-alert>
+    </div>
+    <hr v-if="legend.additionaldownload" class="trenner">
     <div style="display: flex; flex-wrap: wrap;">
         <button
             v-for="card in legend.cards.filter(i => i.type ==='instruction')"
@@ -61,23 +69,6 @@
             <!--<button v-if="legendHistory.cards.filter(i=> i.slug === card.slug).seen">toto</button>-->
         </button>  
     </div>
-    <!--<div 
-        v-for="card in legend.cards.filter(i => i.type === 'instruction')"
-        :key="card.name"
-        class="instructionCardHolder">
-        <button
-            align="end" 
-            :raised="!card.seen"
-            size="large"
-            :type="card.seen ? 'primary': 'secondary'"
-            class="cardbtn customcard"
-            :class="{ seen: card.seen }"
-            @click="handleOpenCard(card.slug)"
-            >
-            {{ card.name }}
-        </button>
-        <div class="instructionTitle" style="padding-right: 15px;"><b>{{ card.name }}</b><br/>{{ card.subname }}</div>
-    </div>-->
     <hr v-if="legend.cards.filter(i => i.type ==='instruction').length !== 0" class="trenner">
     <div style="display: flex; flex-wrap: wrap;">
         <button
