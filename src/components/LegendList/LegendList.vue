@@ -164,6 +164,7 @@
                     <v-expansion-panel v-for="(legend, index) in navigation.historyList" :key="index">
                         <v-expansion-panel-title>
                             {{ legend.name }}
+                            <v-icon v-if="legend.officialBonus==true" class="only-download" color="red-darken-2" icon="mdi-shield-sword"></v-icon>
                             <v-icon v-if="legend.cardsCount==0" class="only-download" color="red-darken-2" icon="mdi-link"></v-icon>
                             <template v-slot:actions v-if="legend.done">
                                 <v-icon color="teal">mdi-check</v-icon>
