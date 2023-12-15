@@ -12,7 +12,7 @@
     
     let navigation = reactive({
         page: 1,
-        pageSize: 15,
+        pageSize: 12,
         //list: [], //[]
         listCount: 0,
         historyList: []
@@ -171,32 +171,29 @@
                             </template>
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
-                            {{ legend.abstract }} <em>Created by {{ legend.author }} ({{ legend.year }})</em>
+                            {{ legend.abstract }} <em v-if="legend.author">{{$t("list.createdBy")}} {{ legend.author }}</em> <em>({{ legend.year }})</em>
                             <v-row class="details" justify="center">
                                 <v-col class="features" sm="9"  justify="center">
                                     <v-chip size="small" >
                                         <!--{{ legend.difficulty}}-->
                                         {{ legend.difficulty.map((diff) => { 
                                             //console.log(diff); 
-                                            return options.difficultiesOptions.filter(item => {return item['key'] == diff} )[0].name
+                                            return $t(options.difficultiesOptions.filter(item => {return item['key'] == diff} )[0].name)
                                         }).join(' - ') }}
                                     </v-chip>
                                     <v-chip size="small" >
                                         {{ legend.board.map((boardOne) => { 
-                                            //console.log(diff); 
-                                            return options.boardOptions.filter(item => {return item['key'] == boardOne} )[0].name
+                                            return $t(options.boardOptions.filter(item => {return item['key'] == boardOne} )[0].name)
                                         }).join(' - ') }}
-                                        <!--{{ legend.board }}-->
                                     </v-chip>
                                     <v-chip size="small">
-                                        {{ legend.players }} joueurs
-                                        <!--{{ legend.board }}-->
+                                        {{ legend.players }} {{ $t("playersCountText", parseInt(legend.players.charAt(0))) }}
                                     </v-chip>
                                     <v-chip size="small" class="bg-red-accent-3"
                                         download
                                         @click="downloadAdditional(legend.additional)"
                                         v-if="legend.additional">
-                                        Contenu PnP
+                                        {{ $t("legend.additionalPnp") }}
                                     </v-chip>
                                     
                                 </v-col>

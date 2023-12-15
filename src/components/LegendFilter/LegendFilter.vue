@@ -24,10 +24,10 @@
     <section class="page">
         <v-row class="center">
             <v-col >
-                <p class="text-h5">Disponibilité des Légendes</p>
+                <p class="text-h5">{{ $t("filter.availabilityType") }}</p>
                 <v-switch
                     color="light-green-darken-4"
-                    label="Jouable dans l'application"
+                    v-bind:label="$t('filter.playableInApp')"
                     v-model="selected.inApp"
                     name="inApp"
                     hide-details
@@ -36,7 +36,7 @@
                         color="light-green-darken-4"
                         v-model="selected.withPrintableElement"
                         name="withPrintableElement"
-                        label="Avec Elements imprimables"
+                        v-bind:label="$t('filter.printableElement')"
                         hide-details
                         ></v-switch>
                     </div>
@@ -44,25 +44,29 @@
                     color="light-green-darken-4"
                     v-model="selected.onlyPrintable"
                     name="onlyPrintable"
-                    label="A imprimer uniquement"
-                    hide-details
-                    ><template v-slot:label>A imprimer uniquement<v-icon class="only-download" color="red-darken-2" icon="mdi-link"></v-icon></template></v-switch>
-                <p class="text-h5">Type des Légendes</p>
+                    hide-details>
+                    <template v-slot:label>
+                        {{ $t('filter.printOnly') }}<v-icon class="only-download" color="red-darken-2" icon="mdi-link"></v-icon>
+                    </template>
+                </v-switch>
+                <p class="text-h5">{{ $t('filter.legendType') }}</p>
                 <v-switch
                     color="light-green-darken-4"
                     v-model="selected.officialLegends"
                     name="officialLegends"
-                    label="Légendes officielles"
-                    hide-details
-                    ><template v-slot:label>Légendes Bonus officielles<v-icon class="only-download" color="red-darken-2" icon="mdi-shield-sword"></v-icon></template></v-switch>
+                    hide-details>
+                    <template v-slot:label>{{ $t('filter.officialLegends') }}
+                        <v-icon class="only-download" color="red-darken-2" icon="mdi-shield-sword"></v-icon>
+                    </template>
+                </v-switch>
                 <v-switch
                     color="light-green-darken-4"
                     v-model="selected.fanLegends"
                     name="fanLegends"
-                    label="Légendes de Fans"
+                    v-bind:label="$t('filter.fanLegends')"
                     hide-details
                     ></v-switch>
-                <p class="text-h5">Difficulté</p>
+                <p class="text-h5">{{ $t('filter.difficulty') }}</p>
                 <v-chip-group
                     v-model="selected.difficulty"
                     selected-class="bg-light-green-darken-4"
@@ -72,12 +76,12 @@
                         v-for="difficulty in options.difficultiesOptions" 
                             :key="difficulty.key"
                             :value="difficulty.key">
-                        {{ difficulty.name }}
+                        {{ $t(difficulty.name) }}
                     </v-chip>
                 </v-chip-group>
                 
 
-                <p class="text-h5">Plateau</p>
+                <p class="text-h5">{{ $t('filter.board') }}</p>
                 <v-chip-group
                     v-model="selected.board"
                     selected-class="bg-light-green-darken-4"
@@ -87,12 +91,12 @@
                         v-for="board in options.boardOptions" 
                             :key="board.key"
                             :value="board.key">
-                        {{ board.name }}
+                        {{ $t(board.name) }}
                     </v-chip>
                 </v-chip-group>
                 
 
-                <p class="text-h5">Année de publication</p>
+                <p class="text-h5">{{ $t('filter.year') }}</p>
                 <v-chip-group
                     v-model="selected.year"
                     selected-class="bg-light-green-darken-4"
@@ -116,7 +120,7 @@
             </v-col>
         </v-row>
         <v-bottom-navigation active>
-            <v-btn @click="historyBack"  block>Afficher ({{store.getNumberOfLegends}} Résultats)</v-btn>
+            <v-btn @click="historyBack"  block>{{ $t("filter.displayResults", store.getNumberOfLegends) }}</v-btn>
         </v-bottom-navigation>
     </section>
 </v-container>

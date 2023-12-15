@@ -5,6 +5,36 @@
         "filter": "Filtrer",
         "allPlayedAsk": "Avez-vous déjà joué à toutes les légendes ?",
         "contribution": "Aidez-nous à fournir encore plus de légendes de fans dans cette application !",
-        "startLegend": "Commencer"
-    }
+        "startLegend": "Commencer",
+        "downloadLegend": "Télécharger",
+        "createdBy": "Créée par"
+    },
+    "filter": {
+        "availabilityType": "Disponibilité des Légendes",
+        "playableInApp": "Jouable dans l'application",
+        "printableElement":"Avec Elements imprimables",
+        "printOnly": "A imprimer uniquement",
+        "officialLegends":"Légendes officielles",
+        "legendType": "Type des Légendes",
+        "fanLegends": "Légendes de Fans",
+        "difficulty": "Difficulté",
+        "board": "Plateau",
+        "year": "Année de publication",
+        "displayResults": "Aucun résultat | Afficher {n} résultat | Afficher {n} résultats"
+    },
+    "legend": {
+        "additionalPnp": "Contenu PnP"
+    },
+    "playersCountText": "joueur | joueurs",
+    "Facile": "Facile",
+    "Moyenne": "Moyenne",
+    "Difficile": "Difficile",
+    "Andor": "Andor",
+    "Cavern": "Cavern",
+    "Mer du Nord": "Mer du Nord",
+    "Hadria": "Hadria",
+    "Montagnes grises": "Montagnes grises",
+    "Krahd": "Krahd",
+    "Andor enneigé": "Andor enneigé",
+    "Pays des trois frères": "Pays des trois frères"
 }
