@@ -24,10 +24,15 @@ files.forEach( function (file) {
         var shortLegend = {
             name: obj.name,
             slug: obj.slug,
+            type: obj.type,
+            saga: obj.series,
+            sagaNumber: obj.number,
+//            "type":"series","series":"BLALBLAL","number":"1"
             file: file,
             author: obj.author,
             abstract: obj.abstract,
             year: obj.year,
+            officialBonus: obj.officialBonus,
             players: obj.players,
             difficulty: obj.difficulty,
             board: obj.board,
