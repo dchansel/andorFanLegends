@@ -17,6 +17,8 @@ export const useLegendsStore = defineStore('legends', {
             inApp: true,
             withPrintableElement: true,
             onlyPrintable: true,
+            officialLegends: true,
+            fanLegends: true,
             difficulty: options.difficultiesOptions.map(n => {return n.key}), // Object.keys(options.difficultiesOptions) //[1,2,3]
             board: options.boardOptions.map(n => {return n.key}),
             year: options.yearOptions,
@@ -70,6 +72,10 @@ export const useLegendsStore = defineStore('legends', {
             }
             
             return "No legends";
+        },
+        getSelectedType(state) {
+            console.log(state.filtering);
+            return true;
         }
         /*currentLegend: (state) => {
             console.log(router.params.legendSlug)
@@ -146,7 +152,16 @@ export const useLegendsStore = defineStore('legends', {
                 }
                 return true;
             });
-            
+            // filter official and fan legends
+            legends = legends.filter(function (n) { // Official bonus or Fan Legends
+                if ( !filter.officialLegends && ( n.hasOwnProperty("officialBonus")  && n.officialBonus == true) ) { 
+                    return false;
+                }
+                if ( !filter.fanLegends && ( n.officialBonus != true) ) { 
+                    return false;
+                }
+                return true;
+            });
         
             // get history
             legends = legends.map(legend => {

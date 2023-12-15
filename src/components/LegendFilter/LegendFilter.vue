@@ -7,11 +7,6 @@
     import { useRouter } from 'vue-router';
     const router = useRouter();
 
-    //const difficultiesOptions = [{name:'Facile', key:1}, {name:'Moyenne', key:2}, {name:'Difficile', key:3}];
-    //const boardOptions = [{name:'Andor',key:1},{name:'Cavern',key:2},{name:'Mer du Nord',key:3},{name:'Hadria',key:4},{name:'Montagnes grises',key:5},{name:'Krahd',key:6},{name:'Andor enneigé',key:7},{name:'Pays des trois frères',key:8}];
-    //const yearOptions = ['2013','2014','2015','2016','2017'];
-    //const boxExtOptions = [{name:'Andor (base)', key:1},{name:'Voyage vers le Nord', key:2},{name:'Le Dernier Espoir', key:3}, {name:'Froid Eternel', key:4}, {name:'Boite Bonus', key:5}, {name:'Lég. oubliées : Heures sombres', key:6}, {name:'Lég. oubliées : Esprits Ancestraux', key:7}, {name:'Lég. de Gardétoile', key:8}, {name:'Nouveaux Héros', key:9}, {name:'Héros Sombres', key:10}  ]
-    
     const store = useLegendsStore();
     let selected = reactive(store.filtering);
     watch(selected, () => {
@@ -50,6 +45,21 @@
                     v-model="selected.onlyPrintable"
                     name="onlyPrintable"
                     label="A imprimer uniquement"
+                    hide-details
+                    ><template v-slot:label>A imprimer uniquement<v-icon class="only-download" color="red-darken-2" icon="mdi-link"></v-icon></template></v-switch>
+                <p class="text-h5">Type des Légendes</p>
+                <v-switch
+                    color="light-green-darken-4"
+                    v-model="selected.officialLegends"
+                    name="officialLegends"
+                    label="Légendes officielles"
+                    hide-details
+                    ><template v-slot:label>Légendes Bonus officielles<v-icon class="only-download" color="red-darken-2" icon="mdi-shield-sword"></v-icon></template></v-switch>
+                <v-switch
+                    color="light-green-darken-4"
+                    v-model="selected.fanLegends"
+                    name="fanLegends"
+                    label="Légendes de Fans"
                     hide-details
                     ></v-switch>
                 <p class="text-h5">Difficulté</p>
