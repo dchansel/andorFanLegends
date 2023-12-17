@@ -84,6 +84,7 @@ export const useHistoriesStore = defineStore('history', {
             let history = {
                 "name": legend.name,
                 "slug": legend.slug,
+                "done": legend.done,
                 "cards": legend.cards.map(card => {
                     return {
                         "slug": card.slug,
