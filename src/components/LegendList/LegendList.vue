@@ -1,7 +1,6 @@
 <script setup>
     import router from './../../router';
     //import { useRoute} from 'vue-router';
-    //import { storeToRefs } from 'pinia'
     import {useLegendsStore} from './../../stores';
     import {reactive, computed} from 'vue';
     import options from './../../options';
@@ -9,6 +8,7 @@
     //const route = useRoute();
     const store = useLegendsStore();
     store.legends = store.loadLegends2()
+    store.legend = null
     
     let navigation = reactive({
         page: 1,
