@@ -7,12 +7,14 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "legends": "node ./src/tools/combine.js",
-    "splitlegends": "node ./src/tools/transform-de.js" 
+    "splitlegends": "node ./src/tools/transform-de.js"
   },
   "dependencies": {
+    "andor-legendcard": "github:dchansel/andorLegendCard",
     "core-js": "^3.8.3",
     "marked": "^4.1.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
     "vue-i18n": "^9.7.0",
@@ -28,6 +30,7 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "andor-legendcard": "file:./../andorLegendCard",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   },
