@@ -24,7 +24,9 @@ import i18n from "./locales/i18n.js";
 
 // pinia
 import {createPinia} from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate)
 
 import './registerServiceWorker'
 

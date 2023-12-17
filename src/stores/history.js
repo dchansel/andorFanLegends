@@ -3,7 +3,11 @@ import {useLegendsStore} from './index.js';
 //import { useRoute } from "vue-router";
 
 export const useHistoriesStore = defineStore('history', {
-
+    persist: true,
+    /*$persist: {
+        storage: sessionStorage,
+        paths: ['someState'],
+    },*/
     state: () => ({
         history: [
             //{"name":"La Danse de la Sorcière","slug":"la-danse-de-la-sorciere","cards":[{"slug":"a1","seen":true},{"slug":"a2","seen":false},{"slug":"a3","seen":false},{"slug":"b","seen":false},{"slug":"c","seen":false},{"slug":"g","seen":false},{"slug":"la-cache-de-la-sorciere","seen":false},{"slug":"N","seen":false}]}
