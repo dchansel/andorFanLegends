@@ -19,7 +19,7 @@ export const useLegendsStore = defineStore('legends', {
             onlyPrintable: true,
             officialLegends: true,
             fanLegends: true,
-            difficulty: options.difficultiesOptions.map(n => {return n.key}), // Object.keys(options.difficultiesOptions) //[1,2,3]
+            difficulty: options.difficultiesOptions.map(n => {return n.key}),
             board: options.boardOptions.map(n => {return n.key}),
             year: options.yearOptions,
         }
@@ -33,8 +33,19 @@ export const useLegendsStore = defineStore('legends', {
         getCurrentLegend: (state) => {
             return state.legend
         },
+        /*currentLegend: (state) => {
+            console.log(router.params.legendSlug)
+            return state.legends.find(i => i.slug === router.params.legendSlug) || false;
+        },*/
+        /*currentCard: (state, getters) => {
+            //const route = useRoute();
+            //console.log(route)    
+            //console.log(route.params.cardSlug)
+            //console.log(router.params.cardSlug)
+            //return getCurrentLegend && getCurrentLegend.cards.find(i => i.slug === state.route.params.cardSlug) || false;
+        },*/
         getSelectedYear(state) {
-            if(state.filtering.year.length == 1) {
+            if (state.filtering.year.length == 1) {
                 return state.filtering.year[0];
             } else {
                 return "Années (" + state.filtering.year.length + ")"
@@ -74,38 +85,56 @@ export const useLegendsStore = defineStore('legends', {
             return "No legends";
         },
         getSelectedType(state) {
-            console.log(state.filtering);
+            //console.log(state.filtering);
             return true;
-        }
+        },
+        /*getCurrentHistoryLegend(state) {
+            console.log("LEGEND" + this.legend.slug)
+            this.getLegendHistory(this.legend.slug)
+        }*/
         /*currentLegend: (state) => {
             console.log(router.params.legendSlug)
             return state.legends.find(i => i.slug === router.params.legendSlug) || false;
         },*/
         
-        /*currentCard(state, getters){
-          return getters.currentLegend && getters.currentLegend.cards.find(i => i.slug === state.route.params.cardSlug) || false;
-        }*/
+        /**/
     },
     actions: {
         fetchLegend() {
             const route = useRoute();
             this.legend = null;
             this.legend = require('./../../public/legends/' + i18n.global.locale.value + "/" + route.params.legendSlug + '.json');
+            
             // Sort cards by name
             this.legend.cards = sort_by_key(this.legend.cards, 'name');
+
+            // Get the Legend's History
+            const history = useHistoriesStore();
             
-            // Get the Legend's History 
-            this.legendHistory = getLegendHistory(this.legend.slug)
+            history.loadHistory(this.legend.slug)
+            /*this.legendHistory = this.getLegendHistory(this.legend.slug);
             if (!this.legendHistory) {
                 createLegendHistory(this.legend);
-                this.legendHistory = getLegendHistory(this.legend.slug)
-            } else {
+                this.legendHistory = this.getLegendHistory(this.legend.slug)
+            }*/ /*else {
                 console.log("History exist");
-            }
+                //this.legendHistory = getLegendHistory(this.legend.slug)
+            }*/
+            //console.log(this.legendHistory.cards)
         },
-        currentLegend(){
+        /*currentLegend(){
             return this.state.legends.find(i => i.slug === this.state.route.params.legendSlug) || false;
-        },
+        },*/
+        /*getLegendHistory(slug) {
+            const store = useHistoriesStore();
+            //console.log(store);
+            //console.log("getLegendHistory")
+            console.log(store.history.find(i => i.slug === slug))// || false;
+            return store.history.find(i => i.slug === slug)
+            //console.log("getLegendHistory")
+            //console.log(store.legendHistory(slug))
+            //return store.legendHistory(slug);
+        },*/
         /*activeLegend() {
             const route = useRoute();
             //const route = useRoute();
@@ -115,6 +144,7 @@ export const useLegendsStore = defineStore('legends', {
         loadLegends2(state) {
 
             let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
+            // TODO : REPLACE internal func by using the history Store
             let history = getHistory().value;
         
             // FILTERING
@@ -181,37 +211,12 @@ export const useLegendsStore = defineStore('legends', {
     },
 })
 
-/*const loadLegends = (state) => {
-
-    let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
-    let history = getHistory().value;
-
-    // get history
-    legends = legends.map(legend => {
-        let doneState = history.find(i => {
-            if( i.slug === legend.slug) {
-                //console.log("DONE = " + i.done);
-                return i.done;
-            }
-            return false;
-        }) || false;
-        let done =  doneState.done || false;
-        return {...legend, done: done };
-      });
-    return legends;
-}*/
-
 function getHistory() {
     const {history} = storeToRefs(useHistoriesStore());
     return history;
 }
 
-function getLegendHistory(slug) {
-    const store = useHistoriesStore();
-    return store.legendHistory(slug);
-}
-
-function createLegendHistory(legend) {
+/*function createLegendHistory(legend) {
     //console.log("1-" + legend.name);
     let history = {
         "name": legend.name,
@@ -227,7 +232,7 @@ function createLegendHistory(legend) {
     // Add to History Store
     const store = useHistoriesStore();
     store.addHistory(history);
-}
+}*/
 
 function sort_by_key(array, key) {
     return array.sort(function(a, b) {

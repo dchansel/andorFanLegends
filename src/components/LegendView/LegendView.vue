@@ -2,14 +2,18 @@
     import { reactive,defineEmits } from 'vue'; //
     import router from './../../router';
     import {storeToRefs} from 'pinia';    
-    import {useLegendsStore} from './../../stores';    
-    import cardView from './CardView';
+    import {useLegendsStore} from './../../stores';
+    import {useHistoriesStore} from "./../../stores/history.js";
+    //import cardView from './CardView';
+    import cardView from "andor-legendcard";
 
     const {legend} = storeToRefs(useLegendsStore()); //, legendHistory
     
     const { fetchLegend } = useLegendsStore()
+    const {setCurrentHistory} = useHistoriesStore();
 
     fetchLegend();
+    setCurrentHistory();
 
     const emits = defineEmits(["activeLegend"])
     emits('activeLegend', legend.value.name)
@@ -23,6 +27,10 @@
         this.currentCard = legend.value.cards.find(f => {
             return f.slug === slug
         });
+        
+        const history = useHistoriesStore()
+        history.seenCard(slug)
+        //this.$store.commit("seeCard");
     }
 
     function handleCloseCard() {
@@ -34,11 +42,14 @@
         }
     }
 
-    function isSeen() { //cardSlug
-        //console.log("HISTORY");
+    function isSeen(cardSlug) {//
+        const history = useHistoriesStore()
+        const historyLegend = history.getCurrentLegendHistory
+        return historyLegend.cards.find(i=> i.slug === cardSlug).seen;
         //console.log("CARD SLUG = " + cardSlug);
-        //console.log(this.legendHistory.cards);
-        //console.log(this.legendHistory.cards.find(i=> i.slug === cardSlug));
+        //console.log("HISTORY");
+        
+        //console.log(historyLegend.cards);
         //let historyCard = this.legendHistory.cards.find(i=> i.slug === cardSlug)
         //console.log("TO SEEN OK = " + cardSlug);
         //return this.legendHistory.cards.find(i=> i.slug === cardSlug).seen;
@@ -96,7 +107,7 @@
             size="large"
             :type="card.seen ? 'primary': 'secondary'"
             class="cardbtn customcard"
-            :class="{ seen: card.seen }"
+            :class="{ seen: isSeen(card.slug) }"
             @click="handleOpenCard(card.slug)"
             >
             {{ card.name }}
