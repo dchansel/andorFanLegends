@@ -19,7 +19,8 @@
     "vue": "^3.2.13",
     "vue-i18n": "^9.7.0",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.4.0"
+    "vuetify": "^3.4.0",
+    "vuetify-use-dialog": "^0.6.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -30,6 +31,7 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-service": "5.0.8",
+    "andor-legendcard": "file:./../andorLegendCard",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   },
