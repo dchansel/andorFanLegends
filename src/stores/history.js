@@ -103,10 +103,33 @@ export const useHistoriesStore = defineStore('history', {
             //this.getters.currentCard.seen = true;
             
         },
+        doAction(type){
+            switch(type){
+                case 'finish':
+                    console.log('finish')
+                    this.activeHistory.cards.map(card => {
+                            card.seen = true
+                    })
+                    break;
+                case 'reset':
+                    this.activeHistory.cards.map(card => {
+                        card.seen = false
+                })
+                    break;
+            }
+        },
+        legendReset() {
+
+        },
 
         legendDone() {
 
         },
+
+        cardsDone() {
+
+        },
+
 
         legendHistory(slug) {
             //console.log("history store" + slug);

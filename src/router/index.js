@@ -14,6 +14,7 @@ const router = createRouter({
         },
         {
             path: '/filter',
+            name: "filter",
             component: LegendFilter
         },
         {

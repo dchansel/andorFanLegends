@@ -7,6 +7,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import VuetifyUseDialog from 'vuetify-use-dialog'
 
 const vuetify = createVuetify({
     components,
@@ -35,4 +36,5 @@ createApp(App)
     .use(vuetify)
     .use(router)
     .use(i18n)
+    .use(VuetifyUseDialog)
     .mount('#app')

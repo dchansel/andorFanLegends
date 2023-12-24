@@ -5,6 +5,7 @@
     import {useLegendsStore} from './../../stores';
     import {useHistoriesStore} from "./../../stores/history.js";
     //import cardView from './CardView';
+
     import cardView from "andor-legendcard";
 
     const {legend} = storeToRefs(useLegendsStore()); //, legendHistory
@@ -60,10 +61,15 @@
 <div>
     <div v-if="legend.additionaldownload" style="display: flex; flex-wrap: wrap;">
         <v-alert
+            icon="mdi-download"
             type="warning"
             closable 
-            text="Du contenu complémentaire est à imprimer (ou reproduire) avant de débuter la partie"
-        ></v-alert>
+            text="Du contenu complémentaire est à imprimer (ou reproduire) avant de débuter la partie">
+
+            <v-btn density="compact" target="_blank"
+                class="ms-5 bg-orange-darken-4"
+                :href="'/legends/fr/additional-pdf/' + legend.additionaldownload">{{ $t('list.downloadLegend') }}</v-btn>
+        </v-alert>
     </div>
     <hr v-if="legend.additionaldownload" class="trenner">
     <div style="display: flex; flex-wrap: wrap;">

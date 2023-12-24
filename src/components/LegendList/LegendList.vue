@@ -16,7 +16,10 @@
         //list: [], //[]
         listCount: 0,
         historyList: []
-    });
+    })
+
+    let searchKeyword = reactive()
+
 
     initPage();
     //updatePage();
@@ -61,6 +64,10 @@
     // METHODS 
     function handleFilter() {
         router.push(`/filter`);
+    }
+
+    function onSearch() {
+        console.log(searchKeyword)
     }
     
     function changeLegend(slug) {
@@ -117,18 +124,36 @@
         initPage();
     }
 
-    function downloadAdditional (additionalUrl) {
+    /*function downloadAdditional (additionalUrl) {
         const url = '/legends/fr/additional-pdf/' + additionalUrl;
         window.location.href = url;
-    }
+    }*/
 </script>
 
 <template>
     <v-container fill-height fluid >
         <v-row>
-            <v-col md="12">
-                <v-btn prepend-icon="mdi-filter-variant" size="small" @click="handleFilter">{{$t("list.filter")}}</v-btn>
+            <v-col md="3" class="d-flex">
+                <v-btn prepend-icon="mdi-filter-variant"
+                    class="filter"
+                    density="confortable"
+                    @click="handleFilter">{{$t("list.filter")}}</v-btn>
             </v-col>
+            <v-col md="6" class="d-flex" align-self="end"> 
+                <v-text-field
+                    class="ps-8"
+                    density="compact"
+                    variant="solo"
+                    v-bind:label="$t('search')"
+                    append-inner-icon="mdi-magnify"
+                    single-line
+                    hide-details
+                    @keydown.enter="onSearch"
+                    v-model="searchKeyword">
+                </v-text-field>
+            </v-col>
+        </v-row>
+        <v-row>
             <v-chip
                 v-show="showAvailability()"
                 class="ma-2"
@@ -177,7 +202,6 @@
                                     <v-chip size="small" >
                                         <!--{{ legend.difficulty}}-->
                                         {{ legend.difficulty.map((diff) => { 
-                                            //console.log(diff); 
                                             return $t(options.difficultiesOptions.filter(item => {return item['key'] == diff} )[0].name)
                                         }).join(' - ') }}
                                     </v-chip>
@@ -191,7 +215,6 @@
                                     </v-chip>
                                     <v-chip size="small" class="bg-red-accent-3"
                                         download
-                                        @click="downloadAdditional(legend.additional)"
                                         v-if="legend.additional">
                                         {{ $t("legend.additionalPnp") }}
                                     </v-chip>
@@ -209,9 +232,7 @@
                                             density="comfortable" class="bg-orange-darken-4 float-right rounded mt-3">
                                             {{ $t("list.startLegend") }}</v-btn>
                                 </v-col>
-                            </v-row>
-                            
-                            
+                            </v-row> 
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                     <v-pagination class="pagination mb-2" v-model="navigation.page" :length="pages" @update:modelValue="updatePage"></v-pagination>
@@ -233,5 +254,8 @@
 }
 .only-download {
     margin: 0 10px;
+}
+.filter{
+    text-transform: none;
 }
 </style>

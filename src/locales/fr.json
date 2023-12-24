@@ -22,6 +22,7 @@
         "year": "Année de publication",
         "displayResults": "Aucun résultat | Afficher {n} résultat | Afficher {n} résultats"
     },
+    "search": "Recherche",
     "legend": {
         "additionalPnp": "Contenu PnP"
     },
