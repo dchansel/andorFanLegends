@@ -1,9 +1,22 @@
 <script setup>
-    import { ref } from 'vue';
-    import { computed } from 'vue';
+    import { ref, computed, reactive } from 'vue';
+    //import { computed } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useConfirm, useSnackbar } from 'vuetify-use-dialog'
-    import {useHistoriesStore} from "./stores/history.js";
+    import { useHistoriesStore } from "./stores/history.js";
+
+    import { useI18n } from "vue-i18n";
+    import {useSettingsStore} from './stores/settings.js';
+    const t = useI18n();
+    const userSettings = useSettingsStore();
+    let languageSettings = reactive(userSettings.activeLanguage);
+    if (languageSettings != null && languageSettings != t.locale.value) {
+        t.locale.value = languageSettings;
+    }
+    userSettings.activeLanguage = t.locale.value; 
+    //console.log(t.locale.value)
+    //t.locale.value = "de";
+    
 
     const route = useRoute();
     const router = useRouter();
@@ -15,6 +28,9 @@
     const filter = computed(() => {
         //return this.$route.path === "/";
         return route.path === "/filter";
+    });
+    const settings = computed(() => {
+        return route.path === "/settings";
     });
 
     function historyBack() {
@@ -71,6 +87,10 @@
         return true
     }
 
+    function handleSettings() {
+        router.push(`/settings`);
+    }
+
     /*function handleLoading() {
         this.$store.dispatch("loadLegenden");
     }
@@ -88,7 +108,7 @@
             <v-app-bar class="v-theme--dark" :elevation="2">
                 <div id="back">
                     <v-btn density="default" icon="mdi-keyboard-backspace"
-                        v-show="!mainpage"
+                        v-show="!mainpage && !settings"
                         @click="historyBack"
                     ></v-btn>
                 </div>
@@ -122,7 +142,12 @@
                     <v-btn icon="mdi-dots-vertical"></v-btn>
                 </template>-->
                 <template v-slot:append>
-                    <v-menu class="align-content-end" v-if="!mainpage && !filter">
+                    <v-menu class="align-content-end" v-if="mainpage">
+                        <template  v-slot:activator="{ props }">
+                        <v-btn icon="mdi-cog" v-bind="props" @click="handleSettings"></v-btn>
+                        </template>
+                    </v-menu>
+                    <v-menu class="align-content-end" v-if="!mainpage && !filter && !settings">
                         <template v-slot:activator="{ props }">
                         <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
                         </template>

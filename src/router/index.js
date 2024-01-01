@@ -3,6 +3,7 @@ import { createRouter, createWebHistory} from "vue-router";
 import LegendList from './../components/LegendList/LegendList.vue';
 import LegendFilter from './../components/LegendFilter/LegendFilter.vue';
 import LegendView from './../components/LegendView/LegendView.vue';
+import SettingsView from './../components/SettingsView/SettingsView.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -16,6 +17,11 @@ const router = createRouter({
             path: '/filter',
             name: "filter",
             component: LegendFilter
+        },
+        {
+            path: '/settings',
+            name: "settings",
+            component: SettingsView
         },
         {
             path: '/:legendSlug/:cardSlug?',

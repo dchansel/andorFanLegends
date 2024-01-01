@@ -22,6 +22,10 @@
         "year": "Année de publication",
         "displayResults": "Aucun résultat | Afficher {n} résultat | Afficher {n} résultats"
     },
+    "settings": {
+        "title": "Paramètres",
+        "availableLanguages": "Langue"
+    },
     "search": "Recherche",
     "legend": {
         "additionalPnp": "Contenu PnP"
