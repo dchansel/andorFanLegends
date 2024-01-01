@@ -141,7 +141,7 @@ export const useLegendsStore = defineStore('legends', {
             //console.log(route.params.legendSlug);
             return require('./../../public/legends/' + i18n.global.locale.value + "/" + route.params.legendSlug + '.json');
         },*/
-        loadLegends2(state) {
+        loadLegends2(state, searchKey) {
 
             let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
             // TODO : REPLACE internal func by using the history Store
@@ -192,6 +192,15 @@ export const useLegendsStore = defineStore('legends', {
                 }
                 return true;
             });
+
+            // SEARCHING
+            if(searchKey) {
+                //var userQuery = 'Ombre' //user input
+                var myRegex = new RegExp('.*' + searchKey.trim() + '.*','gi'); //We create a new regular expression, this one tests if the text is contained within a string.
+                legends = legends.filter(function(item){
+                    return (myRegex.test(item.name) || myRegex.test(item.saga) || myRegex.test(item.author))
+                });
+            } 
         
             // get history
             legends = legends.map(legend => {

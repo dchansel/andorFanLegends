@@ -55,9 +55,6 @@
         let _end = pageIndex * navigation.pageSize;
         navigation.historyList = store.legends.slice(_start, _end);
         navigation.page = pageIndex;
-        //console.log("NEW " + pageIndex);
-        //console.log("ACTUEL" + route.query.page);
-        //router.replace({ query: { ...route.query, page } })
         router.replace({ query: { page: pageIndex } })
     }
 
@@ -68,6 +65,8 @@
 
     function onSearch() {
         console.log(searchKeyword)
+        store.legends = store.loadLegends2('',searchKeyword);
+        initPage()
     }
     
     function changeLegend(slug) {
@@ -85,7 +84,6 @@
         store.legends = store.loadLegends2();
         initPage();
     }
-
     function showDifficulty() {
         if(store.filtering.difficulty.length == options.difficultiesOptions.length) {
             return false;
@@ -97,7 +95,6 @@
         store.legends = store.loadLegends2();
         initPage();
     }
-
     function showBoard() {
         if(store.filtering.board.length == options.boardOptions.length) {
             return false;
@@ -109,7 +106,6 @@
         store.legends = store.loadLegends2();
         initPage();
     }
-
     function showAvailability() {
         if (store.getSelectedAvailability == null) {
             return false;
@@ -123,23 +119,18 @@
         store.legends = store.loadLegends2();
         initPage();
     }
-
-    /*function downloadAdditional (additionalUrl) {
-        const url = '/legends/fr/additional-pdf/' + additionalUrl;
-        window.location.href = url;
-    }*/
 </script>
 
 <template>
     <v-container fill-height fluid >
         <v-row>
-            <v-col md="3" class="d-flex">
+            <v-col cols="3"  class="d-flex">
                 <v-btn prepend-icon="mdi-filter-variant"
                     class="filter"
                     density="confortable"
                     @click="handleFilter">{{$t("list.filter")}}</v-btn>
             </v-col>
-            <v-col md="6" class="d-flex" align-self="end"> 
+            <v-col cols="6" offset="3" class="d-flex" align-self="end"> 
                 <v-text-field
                     class="ps-8"
                     density="compact"
@@ -149,7 +140,8 @@
                     single-line
                     hide-details
                     @keydown.enter="onSearch"
-                    v-model="searchKeyword">
+                    v-model="searchKeyword"
+                    :value="searchKeyword">
                 </v-text-field>
             </v-col>
         </v-row>
@@ -188,7 +180,7 @@
                 <v-expansion-panels>
                     <v-expansion-panel v-for="(legend, index) in navigation.historyList" :key="index">
                         <v-expansion-panel-title>
-                            {{ legend.name }}
+                            <template v-if="legend.saga">{{ legend.saga }} {{ legend.sagaNumber}} - </template>{{ legend.name }}
                             <v-icon v-if="legend.officialBonus==true" class="only-download" color="red-darken-2" icon="mdi-shield-sword"></v-icon>
                             <v-icon v-if="legend.cardsCount==0" class="only-download" color="red-darken-2" icon="mdi-link"></v-icon>
                             <template v-slot:actions v-if="legend.done">
