@@ -20,15 +20,16 @@ const vuetify = createVuetify({
 import App from './App.vue'
 import router from "./router";
 
-//i18n
-import i18n from "./locales/i18n.js";
-
 // pinia
 import {createPinia} from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
 
+//i18n
+import i18n from "./locales/i18n.js";
+
+//Service Worker
 import './registerServiceWorker'
 
 createApp(App)
