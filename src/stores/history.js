@@ -21,28 +21,6 @@ export const useHistoriesStore = defineStore('history', {
         },*/
         getCurrentLegendHistory: (state) => {
             return state.activeHistory 
-            /*const legends = useLegendsStore()
-            console.log("getCurrentLegendHistory : " + legends.getCurrentLegend.slug)
-            if (legends.getCurrentLegend) {
-                return this.history.find(i => i.slug === legends.getCurrentLegend.slug)
-            }*/
-            /*if (legends.getCurrentLegend.slug != null) {
-                const slug = legends.getCurrentLegend.slug
-                return  this.loadHistory(slug)
-            }*/
-
-            /*let legendHistory = this.history.find(i => i.slug === legends.getCurrentLegend.slug);
-            if (!legendHistory) {
-                console.log("Creation de l'historique")
-                this.createLegendHistory();
-                //this.getCurrentLegendHistory()
-                legendHistory = this.getLegendHistory(this.legend.slug)
-                return legendHistory;
-            }*/
-            //return legendHistory;
-
-            //console.log(legends)
-            //return null
         },
         currentCardHistory () {
 
@@ -52,39 +30,26 @@ export const useHistoriesStore = defineStore('history', {
     actions: {
         setCurrentHistory() {
             const legends = useLegendsStore()
-            /*console.log("getCurrentLegendHistory : " + legends.getCurrentLegend.slug)
-            if (legends.getCurrentLegend) {
-                return this.history.find(i => i.slug === legends.getCurrentLegend.slug)
-            }*/
             if (legends.getCurrentLegend) {
                 this.activeHistory = this.history.find(i => i.slug === legends.getCurrentLegend.slug)
             }
         },
         loadHistory(slug) {
-            console.log(slug);
-            //console.log(this.history)
-            //console.log(this.history.find(i => i.slug === slug))
             let legendHistory = this.history.find(i => i.slug === slug);
-            console.log(legendHistory)
             if (!legendHistory) {
                 console.log("Creation de l'historique")
                 this.createLegendHistory();
-                //this.getCurrentLegendHistory()
-                //legendHistory = this.getLegendHistory(this.legend.slug)
             }
             return legendHistory;
-            //console.log(legendHistory)
-            //this.getCurrentLegendHistory = legendHistory;
         },
         createLegendHistory() {
             const legends = useLegendsStore()
             console.log(legends.getCurrentLegend)
             const legend = legends.getCurrentLegend
-            //console.log("1-" + legend.name);
             let history = {
                 "name": legend.name,
                 "slug": legend.slug,
-                "done": legend.done,
+                "done": false,
                 "cards": legend.cards.map(card => {
                     return {
                         "slug": card.slug,
@@ -97,11 +62,7 @@ export const useHistoriesStore = defineStore('history', {
             store.addHistory(history);
         },
         seenCard(currentCard) {
-            //console.log(currentCard);
-            this.getCurrentLegendHistory.cards.find(i => i.slug === currentCard).seen = true
-            //console.log(this.getCurrentLegendHistory.cards)
-            //this.getters.currentCard.seen = true;
-            
+            this.getCurrentLegendHistory.cards.find(i => i.slug === currentCard).seen = true            
         },
         doAction(type){
             switch(type){
@@ -110,6 +71,7 @@ export const useHistoriesStore = defineStore('history', {
                     this.activeHistory.cards.map(card => {
                             card.seen = true
                     })
+                    this.activeHistory.done = true
                     break;
                 case 'reset':
                     this.activeHistory.cards.map(card => {
@@ -118,7 +80,7 @@ export const useHistoriesStore = defineStore('history', {
                     break;
             }
         },
-        legendReset() {
+        /*legendReset() {
 
         },
 
@@ -128,55 +90,23 @@ export const useHistoriesStore = defineStore('history', {
 
         cardsDone() {
 
-        },
-
+        },*/
 
         legendHistory(slug) {
-            //console.log("history store" + slug);
-            //return true;
-            console.log("legendHistory")
+/*            console.log("legendHistory")
             console.log(this.history.find(i => {
                 console.log("SLUG" + slug + ' VS ' + i.slug)
                 console.log(i.slug)
                 console.log(i.slug === slug)
                 return i.slug === slug
 
-            }))
+            }))*/
             //{{ areaName.area.find(({id}) => id === 1 ).name }}
             return this.history.find(i => i.slug === slug) || false;
         },
 
         addHistory(history) {
-            //console.log("addHistory");
-            //console.log(history);
             this.history.push(history);
         }
-
-        /*createLegendHistory(legend) {
-            console.log("2-" + legend.name);
-            let history = [];
-            history.name = legend.name
-            history.cards = legend.cards.map(card => {
-                return history.cards.push({
-                    "slug": card.slug,
-                    "seen": false
-                })
-                // return {...card, seen: false };
-            })
-            console.log(history);
-        },*/
-
-        //createLegendHystory(state, legend){
-            //window.localStorage.clear();
-            //return true;
-            
-            // Adding seen: false to every card
-            /*state.legends = legends.map(legend => {
-              legend.cards = legend.cards.map(card => {
-                return {...card, seen: false };
-              })
-              return legend;
-            });*/
-        //},
     }
 });
