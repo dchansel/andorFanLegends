@@ -41,25 +41,15 @@
         </v-row>
         <v-btn block class="text-none mb-4" color="indigo-darken-3" size="x-large" variant="flat"
             @click="applySettings">
-            Appliquer
+            {{ $t("settings.apply") }}
         </v-btn>
         <v-btn block class="text-none" color="grey-lighten-3" size="x-large" variant="flat"
             @click="cancelSettings">
-            Annuler
+            {{ $t("settings.cancel") }}
         </v-btn>
     </section>
     </v-container>
 </template>
-
-<script>
-/*export default {
-    data () {
-      return {
-        radioGroup: 1,
-      }
-    },
-  }*/
-</script>
 
 <style>
 .page {

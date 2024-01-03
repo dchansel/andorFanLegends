@@ -1,8 +1,47 @@
 {
+    "file": "storage/legends-de.json",
     "list": {
         "selection": "Zum Starten wähle bitte eine Legende aus",
-        "allplayedAsk": "Schon alle Legenden gespielt?",
+        "filter": "Filtern",
+        "allPlayedAsk": "Schon alle Legenden gespielt?",
         "contribution": "Helf uns doch, noch mehr Fan-Legenden in dieser App bereitzustellen!",
-        "startLegend": "Legende starten"
-    }
+        "startLegend": "Legende starten",
+        "downloadLegend": "Herunterladen",
+        "createdBy": "Erstellt von"
+    },
+    "filter": {
+        "availabilityType": "Verfügbarkeit der Legenden",
+        "playableInApp": "Spielbar in der App",
+        "printableElement":"Mit Bedruckbare Elemente",
+        "printOnly": "Nur zum Ausdrucken",
+        "officialLegends":"Offizielle Legenden",
+        "legendType": "Typ der Legenden",
+        "fanLegends": "Fan-Legenden",
+        "difficulty": "Schwierigkeit",
+        "board": "Spielplan",
+        "year": "Jahr der Publikation",
+        "displayResults": "Keine Ergebnisse | {n} Ergebnis Anzeigen | {n} Ergebnisse anzeigen"
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "availableLanguages": "Sprache",
+        "apply": "Bewerben",
+        "cancel": "Abbrechen"
+    },
+    "search": "Suche",
+    "legend": {
+        "additionalPnp": "Inhalt PnP"
+    },
+    "playersCountText": "Spieler",
+    "Facile": "Leicht",
+    "Moyenne": "Mittel",
+    "Difficile": "Schwer",
+    "Andor": "Andor",
+    "Cavern": "Cavern",
+    "Mer du Nord": "Norden",
+    "Hadria": "Hadria",
+    "Montagnes grises": "Graues Gebirge",
+    "Krahd": "Krahd",
+    "Andor enneigé": "Verschneite Andor",
+    "Pays des trois frères": "Land der drei Brüder"
 }

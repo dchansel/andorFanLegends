@@ -24,7 +24,9 @@
     },
     "settings": {
         "title": "Paramètres",
-        "availableLanguages": "Langue"
+        "availableLanguages": "Langue",
+        "apply": "Appliquer",
+        "cancel": "Annuler"
     },
     "search": "Recherche",
     "legend": {
