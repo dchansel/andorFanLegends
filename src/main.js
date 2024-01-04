@@ -29,6 +29,9 @@ pinia.use(piniaPluginPersistedstate)
 //i18n
 import i18n from "./locales/i18n.js";
 
+// Analytics
+import {analytics} from "./firebase.js"
+
 //Service Worker
 import './registerServiceWorker'
 
@@ -38,4 +41,5 @@ createApp(App)
     .use(router)
     .use(i18n)
     .use(VuetifyUseDialog)
+    .use(analytics)
     .mount('#app')
