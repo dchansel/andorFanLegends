@@ -12,6 +12,7 @@
   "dependencies": {
     "andor-legendcard": "github:dchansel/andorLegendCard",
     "core-js": "^3.8.3",
+    "firebase": "^10.7.1",
     "marked": "^9.1.6",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
@@ -31,7 +32,6 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-service": "5.0.8",
-    "andor-legendcard": "file:./../andorLegendCard",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   },
