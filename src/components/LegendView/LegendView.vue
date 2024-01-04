@@ -4,8 +4,6 @@
     import {storeToRefs} from 'pinia';    
     import {useLegendsStore} from './../../stores';
     import {useHistoriesStore} from "./../../stores/history.js";
-    //import cardView from './CardView';
-
     import cardView from "andor-legendcard";
 
     const {legend} = storeToRefs(useLegendsStore()); //, legendHistory
@@ -20,12 +18,12 @@
     emits('activeLegend', legend.value.name)
 
     const dialog = reactive({state: false});
-    const currentCard = [];
+    let currentCard = [];
     
     function handleOpenCard(slug) {
         router.push(`/${legend.value.slug}/${slug}`);
         dialog.state = true;
-        this.currentCard = legend.value.cards.find(f => {
+        currentCard = legend.value.cards.find(f => {
             return f.slug === slug
         });
         
