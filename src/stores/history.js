@@ -76,7 +76,8 @@ export const useHistoriesStore = defineStore('history', {
                 case 'reset':
                     this.activeHistory.cards.map(card => {
                         card.seen = false
-                })
+                    })
+                    this.activeHistory.done = false
                     break;
             }
         },
