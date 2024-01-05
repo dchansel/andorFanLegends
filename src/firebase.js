@@ -21,6 +21,15 @@ const firebaseConfig = {
   appId: "1:79096540602:web:272a67d4c0aebb50a24183",
   measurementId: "G-YG6NY08XCW"
 };
+
+window.dataLayer = window.dataLayer || [];
+window.gtag = function(){window.dataLayer.push(arguments);}
+
+window.gtag("config", firebaseConfig.measurementId, {
+	cookie_domain: window.location.hostname,
+	cookie_flags: "SameSite=None;Secure",
+});
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
