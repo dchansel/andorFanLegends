@@ -35,7 +35,7 @@ function getUserLocal() {
 /*    if( languageSettings != null ) {
         return languageSettings;
     } else*/
-    if (availableLocalesList.includes(window.navigator.language)) {
+    if (availableLocalesList.includes(navigator.language)) {
         //languageSettings = window.navigator.language; 
         return navigator.language;
         //return window.navigator.language;
