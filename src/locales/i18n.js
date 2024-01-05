@@ -37,7 +37,8 @@ function getUserLocal() {
     } else*/
     if (availableLocalesList.includes(window.navigator.language)) {
         //languageSettings = window.navigator.language; 
-        return window.navigator.language;
+        return navigator.language;
+        //return window.navigator.language;
     } else {
         return 'en';
     }
