@@ -13,7 +13,6 @@
 
     function languageRadioHandler(newLanguage) {
         store.activeLanguage = newLanguage
-        //console.log(previousLanguage)
     }
     function applySettings() {
         router.push(`/`).then(() => { router.go() });

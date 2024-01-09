@@ -1,11 +1,9 @@
 <script setup>
     import router from './../../router';
-    //import { useRoute} from 'vue-router';
     import {useLegendsStore} from './../../stores';
     import {reactive, computed} from 'vue';
     import options from './../../options';
 
-    //const route = useRoute();
     const store = useLegendsStore();
     store.legends = store.loadLegends2()
     store.legend = null
@@ -19,7 +17,6 @@
     })
 
     let searchKeyword = reactive()
-
 
     initPage();
     //updatePage();
@@ -43,7 +40,6 @@
     // a computed ref
     const pages = computed(() => {
         if (navigation.pageSize == null || navigation.listCount == null) {
-            //console.log( "IF");
             return 0;
         }
         //console.log("PAGES (count & size)= " + navigation.listCount  + "-" + navigation.pageSize )
@@ -188,9 +184,8 @@
                             </template>
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
-                            {{ legend.abstract }} <em v-if="legend.author">{{$t("list.createdBy")}} {{ legend.author }}</em> <em>({{ legend.year }})</em>
-                            <v-row class="details" justify="center">
-                                <v-col class="features" sm="9"  justify="center">
+                            <v-row>
+                                <v-col class="features sp-0" sm="12"  justify="center">
                                     <v-chip size="small" >
                                         <!--{{ legend.difficulty}}-->
                                         {{ legend.difficulty.map((diff) => { 
@@ -210,8 +205,10 @@
                                         v-if="legend.additional">
                                         {{ $t("legend.additionalPnp") }}
                                     </v-chip>
-                                    
                                 </v-col>
+                            </v-row> 
+                            <v-row class="details" justify="center">
+                                {{ legend.abstract }} <em v-if="legend.author">{{$t("list.createdBy")}} {{ legend.author }}</em> <em>({{ legend.year }})</em>
                                 <v-col class="launch" sm="3" align="center" justify="center">
                                         <v-btn 
                                             v-if="legend.cardsCount==0"
@@ -224,7 +221,7 @@
                                             density="comfortable" class="bg-orange-darken-4 float-right rounded mt-3">
                                             {{ $t("list.startLegend") }}</v-btn>
                                 </v-col>
-                            </v-row> 
+                            </v-row>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                     <v-pagination class="pagination mb-2" v-model="navigation.page" :length="pages" @update:modelValue="updatePage"></v-pagination>

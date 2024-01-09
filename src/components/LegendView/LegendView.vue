@@ -15,7 +15,7 @@
     setCurrentHistory();
 
     const emits = defineEmits(["activeLegend"])
-    emits('activeLegend', legend.value.name)
+    emits('activeLegend', {'name':legend.value.name, 'additionaldownload':legend.value.additionaldownload})
 
     const dialog = reactive({state: false});
     let currentCard = [];
@@ -29,11 +29,9 @@
         
         const history = useHistoriesStore()
         history.seenCard(slug)
-        //this.$store.commit("seeCard");
     }
 
     function handleCloseCard() {
-        //console.log(this.currentCard);
         if(currentCard){
             dialog.state = false
             //currentCard.value = [];
@@ -45,13 +43,6 @@
         const history = useHistoriesStore()
         const historyLegend = history.getCurrentLegendHistory
         return historyLegend.cards.find(i=> i.slug === cardSlug).seen;
-        //console.log("CARD SLUG = " + cardSlug);
-        //console.log("HISTORY");
-        
-        //console.log(historyLegend.cards);
-        //let historyCard = this.legendHistory.cards.find(i=> i.slug === cardSlug)
-        //console.log("TO SEEN OK = " + cardSlug);
-        //return this.legendHistory.cards.find(i=> i.slug === cardSlug).seen;
     }
 </script>
 

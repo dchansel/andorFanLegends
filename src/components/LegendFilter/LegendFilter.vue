@@ -1,7 +1,7 @@
 <script setup>
     import {useLegendsStore} from './../../stores';
     import options from './../../options';
-    import {reactive, watch } from 'vue';//computed
+    import {reactive, watch } from 'vue';
 
     // TODO : Delete route and historyback and place result button in main APP.vue ????
     import { useRouter } from 'vue-router';
@@ -32,14 +32,20 @@
                     name="inApp"
                     hide-details
                     ></v-switch>
-                    <div v-show="selected.inApp" style="margin:-25px 30px"><v-switch
-                        color="light-green-darken-4"
-                        v-model="selected.withPrintableElement"
-                        name="withPrintableElement"
-                        v-bind:label="$t('filter.printableElement')"
-                        hide-details
-                        ></v-switch>
-                    </div>
+                <v-switch
+                    color="light-green-darken-4"
+                    v-model="selected.withPrintableElement"
+                    name="withPrintableElement"
+                    v-bind:label="$t('filter.printableElement')"
+                    hide-details>
+                    <template v-slot:label>
+                        {{ $t('filter.printableElement') }}<v-chip size="small" class="bg-red-accent-3 only-download"
+                            download>
+                            {{ $t("legend.additionalPnp") }}
+                        </v-chip>
+                    </template>
+                    
+                </v-switch>
                 <v-switch
                     color="light-green-darken-4"
                     v-model="selected.onlyPrintable"
@@ -111,10 +117,7 @@
                 </v-chip-group>
             <!--    
             <p class="text-h5">Nombre de héros</p>
-            
-            In app : {{selected.inApp}} - onlyPrintable {{ selected.onlyPrintable }}
             <span>difficulté selectionnée : {{selected.difficulty}}</span>
-            <span>Année selectionnée : {{selected.year}}</span>
             <span>Plateau selectionnée : {{selected.board}}</span>
             -->
             </v-col>

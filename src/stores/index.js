@@ -5,12 +5,9 @@ import { defineStore, storeToRefs } from 'pinia';
 import {useHistoriesStore} from "./history.js";
 import { useRoute } from "vue-router";
 
-//const emits = defineEmits(['on-add']);
-
 export const useLegendsStore = defineStore('legends', {
     //TODO: ADD OPTIONS FILE TO INIT filtering with all 
     state: () => ({
-        //legends: this.loadLegends2(),
         legends: [],
         legend: null,
         filtering: {
@@ -33,17 +30,6 @@ export const useLegendsStore = defineStore('legends', {
         getCurrentLegend: (state) => {
             return state.legend
         },
-        /*currentLegend: (state) => {
-            console.log(router.params.legendSlug)
-            return state.legends.find(i => i.slug === router.params.legendSlug) || false;
-        },*/
-        /*currentCard: (state, getters) => {
-            //const route = useRoute();
-            //console.log(route)    
-            //console.log(route.params.cardSlug)
-            //console.log(router.params.cardSlug)
-            //return getCurrentLegend && getCurrentLegend.cards.find(i => i.slug === state.route.params.cardSlug) || false;
-        },*/
         getSelectedYear(state) {
             if (state.filtering.year.length == 1) {
                 return state.filtering.year[0];
@@ -85,19 +71,8 @@ export const useLegendsStore = defineStore('legends', {
             return "No legends";
         },
         getSelectedType(state) {
-            //console.log(state.filtering);
             return true;
         },
-        /*getCurrentHistoryLegend(state) {
-            console.log("LEGEND" + this.legend.slug)
-            this.getLegendHistory(this.legend.slug)
-        }*/
-        /*currentLegend: (state) => {
-            console.log(router.params.legendSlug)
-            return state.legends.find(i => i.slug === router.params.legendSlug) || false;
-        },*/
-        
-        /**/
     },
     actions: {
         fetchLegend() {
@@ -112,35 +87,7 @@ export const useLegendsStore = defineStore('legends', {
             const history = useHistoriesStore();
             
             history.loadHistory(this.legend.slug)
-            /*this.legendHistory = this.getLegendHistory(this.legend.slug);
-            if (!this.legendHistory) {
-                createLegendHistory(this.legend);
-                this.legendHistory = this.getLegendHistory(this.legend.slug)
-            }*/ /*else {
-                console.log("History exist");
-                //this.legendHistory = getLegendHistory(this.legend.slug)
-            }*/
-            //console.log(this.legendHistory.cards)
         },
-        /*currentLegend(){
-            return this.state.legends.find(i => i.slug === this.state.route.params.legendSlug) || false;
-        },*/
-        /*getLegendHistory(slug) {
-            const store = useHistoriesStore();
-            //console.log(store);
-            //console.log("getLegendHistory")
-            console.log(store.history.find(i => i.slug === slug))// || false;
-            return store.history.find(i => i.slug === slug)
-            //console.log("getLegendHistory")
-            //console.log(store.legendHistory(slug))
-            //return store.legendHistory(slug);
-        },*/
-        /*activeLegend() {
-            const route = useRoute();
-            //const route = useRoute();
-            //console.log(route.params.legendSlug);
-            return require('./../../public/legends/' + i18n.global.locale.value + "/" + route.params.legendSlug + '.json');
-        },*/
         loadLegends2(state, searchKey) {
 
             let legends = require('./../../public/legends/legends-'+i18n.global.locale.value+'.json');
@@ -160,6 +107,13 @@ export const useLegendsStore = defineStore('legends', {
                 return n.board.map(String).some(boardOne => filter.board.includes(boardOne));
             });
             legends = legends.filter(function (n) { // Only Printable False
+                if (filter.onlyPrintable && n.cardsCount == 0) { //"Only PnP" && !filter.inApp
+                    //console.log("only pnp");
+                    return  true;
+                }
+                if ( filter.withPrintableElement && ( n.hasOwnProperty("additional")  && n.additional != null) ) { 
+                    return true;
+                }
                 if( filter.inApp && filter.onlyPrintable && filter.withPrintableElement) { //ALL
                     return true;
                 }
@@ -170,18 +124,15 @@ export const useLegendsStore = defineStore('legends', {
                     //console.log("in app");
                     return true;
                 }
-                if (filter.onlyPrintable && !filter.inApp && n.cardsCount == 0) { //"Only PnP"
-                    //console.log("only pnp");
-                    return  true;
-                }
+                
                 return false;
             });
-            legends = legends.filter(function (n) { // Printable Element
+            /*legends = legends.filter(function (n) { // Printable Element
                 if ( !filter.withPrintableElement && ( n.hasOwnProperty("additional")  && n.additional != "") ) { 
                     return false;
                 }
                 return true;
-            });
+            });*/
             // filter official and fan legends
             legends = legends.filter(function (n) { // Official bonus or Fan Legends
                 if ( !filter.officialLegends && ( n.hasOwnProperty("officialBonus")  && n.officialBonus == true) ) { 

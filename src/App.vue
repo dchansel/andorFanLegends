@@ -7,6 +7,23 @@
 
     import { useI18n } from "vue-i18n";
     import {useSettingsStore} from './stores/settings.js';
+
+    import useUpdater from './update.js';
+    let updater = useUpdater();
+    updater.created()
+    //let snackUpdateExists = updater.updateData.snackUpdateExists
+    //let snackUpdate = updater.updateData.updateExists
+    //updateExists = updateData.value.updateExists
+    //console.log(updateExists)
+    function refreshApp() {
+        console.log("refrshapp")
+        updater.updateData.updateExists = false
+        // Make sure we only send a 'skip waiting' message if the SW is waiting
+        if (!updater.updateData.registration || !updater.updateData.registration.waiting) return
+        // Send message to SW to skip the waiting and activate the new SW
+        updater.updateData.registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+    }
+
     const t = useI18n();
     const userSettings = useSettingsStore();
     let languageSettings = reactive(userSettings.activeLanguage);
@@ -19,8 +36,6 @@
     
 
     const route = useRoute();
-    const router = useRouter();
-
     const mainpage = computed(() => {
         //return this.$route.path === "/";
         return route.path === "/";
@@ -33,17 +48,27 @@
         return route.path === "/settings";
     });
 
+    const router = useRouter();
     function historyBack() {
         //this.$router.go(-1);
         router.go(-1);
     }
 
     var activeLegend= ref("");
-    function receiveEmit(legendName) {
-        activeLegend.value = legendName;
+    function receiveEmit(legend) {
+        activeLegend.value = legend;
+        //console.log(legendName)
     }
 
-    function menuFinish()  {
+    function menuAdditionnalPnp() {
+        console.log("additionnal");
+    }
+
+    function menuDownloadLegend() {
+        console.log("download");
+    }
+
+    function menuFinish() {
         let options = {
             title: "Marquer comme terminée",
             content: 'La Légende sera indiquée comme effectuée, et toutes les cartes seront marquées comme lues.',
@@ -51,10 +76,6 @@
             cancellationText: 'Annuler'
         }
         handleConfirm(options,"finish")
-        /*if (handleConfirm(options)) {
-            console.log("Finish");
-            // change history : all cards.seen = true + legend.done = true
-        }*/ 
     }
 
     function menuReset() {
@@ -65,10 +86,6 @@
             cancellationText: 'Annuler'
         }
         handleConfirm(options, 'reset')
-        /*if (handleConfirm(options)) {
-            console.log("Reset")
-            // change history : all cards.seen = false + legend.done = false
-        }*/
     }
 
     const createConfirm = useConfirm()
@@ -91,15 +108,16 @@
         router.push(`/settings`);
     }
 
+    //let updateAvailable = reactive(false)
+    function handleUpdate() {
+        updater.updateData.snackUpdateExists = true
+        //router.push(`/update`);
+    }
+
     /*function handleLoading() {
         this.$store.dispatch("loadLegenden");
-    }
-    function handleSettings() {
-        this.$store.dispatch("loadLegenden");
-    }
-    function dismissMessage() {
-        this.$store.commit("clearMessage");
     }*/
+    //const snackbar = true
 </script>
 
 <template>
@@ -122,29 +140,18 @@
                         type="secondary"
                         @click="handleLoading"
                     ></ui-icon-button>-->
-                    <!--<ui-icon-button
-                        v-show="mainpage"
-                        color="black"
-                        icon="settings"
-                        :loading="loading"
-                        size="large"
-                        type="secondary"
-                        @click="handleSettings"
-                        ></ui-icon-button>-->
                 </div>
                 <img src="./assets/logo-menu.png"
                     v-if="mainpage" 
                     alt style="max-height: 100%">
                 <div
-                    v-if="!mainpage && !filter">{{activeLegend}}
+                    v-if="!mainpage && !filter">{{activeLegend.name}}
                 </div>
-                <!--<template v-slot:append v-if="!mainpage && !filter">
-                    <v-btn icon="mdi-dots-vertical"></v-btn>
-                </template>-->
                 <template v-slot:append>
+                    <v-btn v-show="updater.updateData.updateExists" icon="mdi-bell"  @click="handleUpdate"></v-btn>
                     <v-menu class="align-content-end" v-if="mainpage">
                         <template  v-slot:activator="{ props }">
-                        <v-btn icon="mdi-cog" v-bind="props" @click="handleSettings"></v-btn>
+                            <v-btn icon="mdi-cog" v-bind="props" @click="handleSettings"></v-btn>
                         </template>
                     </v-menu>
                     <v-menu class="align-content-end" v-if="!mainpage && !filter && !settings">
@@ -152,8 +159,11 @@
                         <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
                         </template>
                         <v-list>
-                            <v-list-item @click="menuAdditionnalPnp()">
+                            <v-list-item v-if="activeLegend.additionaldownload" @click="menuAdditionnalPnp()">
                                 <v-list-item-title>Télécharger contenu PnP</v-list-item-title>
+                            </v-list-item>
+                            <v-list-item @click="menuDownloadLegend()">
+                                <v-list-item-title>Télécharger la Légende</v-list-item-title>
                             </v-list-item>
                             <v-list-item @click="menuFinish()">
                                 <v-list-item-title>Marquer comme terminé</v-list-item-title>
@@ -164,11 +174,16 @@
                         </v-list>
                     </v-menu>
                 </template>    
-
             </v-app-bar>
         </v-container>
         <v-main class="d-flex justify-center" style="min-height: 300px;"><!--align-center -->
             <router-view @activeLegend="receiveEmit"></router-view>
+            <v-snackbar bottom right v-model="updater.updateData.snackUpdateExists" :timeout="5000" color="primary">
+                An update is available
+                <v-btn text @click="refreshApp">
+                    Update
+                </v-btn>
+            </v-snackbar>
         </v-main>
     </v-app>
 </template>
