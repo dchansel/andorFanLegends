@@ -190,6 +190,28 @@
 
 <style>
 .v-toolbar__content{
-    background: #5f5f5f; 
+    background: #5f5f5f;
 }
+
+.add-to-homescreen-container {
+    background-color: #33691e !important;
+    color: #fff !important;
+    
+    .icon{
+        background-size: 60% !important;
+    }
+
+    .btn-container{
+        float: none !important;
+
+        .add-button{
+            border-radius: 25px;
+            :hover{
+                background-color:#f1f2f5;
+            }
+        }
+
+    }
+}
+
 </style>

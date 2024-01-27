@@ -10,6 +10,7 @@
     "splitlegends": "node ./src/tools/transform-de.js"
   },
   "dependencies": {
+    "@owliehq/vue-addtohomescreen": "^2.0.3",
     "andor-legendcard": "github:dchansel/andorLegendCard",
     "core-js": "^3.8.3",
     "firebase": "^10.7.1",

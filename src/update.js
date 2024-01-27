@@ -15,13 +15,15 @@ export default function useUpdater() {
         // Listen for our custom event from the SW registration
         document.addEventListener('swUpdated', this.updateAvailable, { once: true })
     
-        // Prevent multiple refreshes
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          if (updateData.refreshing) return
-          updateData.refreshing = true
-          // Here the actual reload of the page occurs
-          window.location.reload()
-        })        
+        if (process.env.NODE_ENV === 'production') {
+          // Prevent multiple refreshes
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (updateData.refreshing) return
+            updateData.refreshing = true
+            // Here the actual reload of the page occurs
+            window.location.reload()
+          })
+        }
     }
 
     function updateAvailable(event) {

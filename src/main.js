@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 // Vuetify
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
+
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -32,6 +33,9 @@ import i18n from "./locales/i18n.js";
 // Analytics
 import {analytics} from "./firebase.js"
 
+// addhomescreen
+import AddToHomescreen from '@owliehq/vue-addtohomescreen';
+
 //Service Worker
 import './registerServiceWorker'
 
@@ -42,4 +46,14 @@ createApp(App)
     .use(i18n)
     .use(VuetifyUseDialog)
     .use(analytics)
+    .use(AddToHomescreen, {
+        expires: 1,
+        title: 'Andor Fan Legends',
+        iconPath: 'img/logo.png',
+        content: " ",
+        buttonColor: '#5f5f5f',
+        background: '#33691e',
+        color: '#fff',
+        iconColor: ''
+    })
     .mount('#app')

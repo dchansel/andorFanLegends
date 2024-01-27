@@ -30,14 +30,14 @@ export default i18n
 function getUserLocal() {
     //console.log("ENVIRONNEMENT" + process.env.VUE_APP_TITLE)
     //return 'de';
-    
+    //alert(navigator.language.substr(0, 2))
     /* eslint-disable */
-/*    if( languageSettings != null ) {
+    /*if( languageSettings != null ) {
         return languageSettings;
     } else*/
-    if (availableLocalesList.includes(navigator.language)) {
+    if (availableLocalesList.includes(window.navigator.language.substr(0, 2))) {
         //languageSettings = window.navigator.language; 
-        return navigator.language;
+        return window.navigator.language.substr(0, 2);
         //return window.navigator.language;
     } else {
         return 'en';
