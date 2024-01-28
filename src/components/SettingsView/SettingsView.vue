@@ -46,6 +46,20 @@
             @click="cancelSettings">
             {{ $t("settings.cancel") }}
         </v-btn>
+        <section class="page">
+            <h3>Informations</h3>
+            <p>
+                Cette application est basée sur une idée et le travail initial de myidol/mdunisch
+                    <ul>
+                        <li>Post Initial : <a href="https://legenden-von-andor.de/forum/viewtopic.php?t=4468">legenden-von-andor.de/forum </a> </li>
+                        <li>Dépôt Git initial : <a href="https://github.com/mdunisch/andor-pwa">github.com/mdunisch/andor-pwa</a></li>
+                    </ul>
+            </p>
+            <p>
+                Pour créer des légendes : <a href="https://andorfanlegendcreator.web.app/">Andor FanLegend Creator</a> 
+                Pour transmettre les légendes créées avec AndorFanLegendCreator : envoyer un email à andorfanlegends (-at-) gmail.com 
+            </p>
+        </section>
     </section>
     </v-container>
 </template>

@@ -1,20 +1,16 @@
 <script setup>
     import { ref, computed, reactive } from 'vue';
-    //import { computed } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useConfirm, useSnackbar } from 'vuetify-use-dialog'
-    import { useHistoriesStore } from "./stores/history.js";
-
     import { useI18n } from "vue-i18n";
-    import {useSettingsStore} from './stores/settings.js';
+
+    import { useHistoriesStore } from "./stores/history.js";
+    import { useSettingsStore } from './stores/settings.js';
 
     import useUpdater from './update.js';
     let updater = useUpdater();
     updater.created()
-    //let snackUpdateExists = updater.updateData.snackUpdateExists
-    //let snackUpdate = updater.updateData.updateExists
-    //updateExists = updateData.value.updateExists
-    //console.log(updateExists)
+    
     function refreshApp() {
         console.log("refrshapp")
         updater.updateData.updateExists = false
@@ -30,18 +26,13 @@
     if (languageSettings != null && languageSettings != t.locale.value) {
         t.locale.value = languageSettings;
     }
-    userSettings.activeLanguage = t.locale.value; 
-    //console.log(t.locale.value)
-    //t.locale.value = "de";
-    
+    userSettings.activeLanguage = t.locale.value;     
 
     const route = useRoute();
     const mainpage = computed(() => {
-        //return this.$route.path === "/";
         return route.path === "/";
     });
     const filter = computed(() => {
-        //return this.$route.path === "/";
         return route.path === "/filter";
     });
     const settings = computed(() => {
@@ -50,14 +41,12 @@
 
     const router = useRouter();
     function historyBack() {
-        //this.$router.go(-1);
         router.go(-1);
     }
 
     var activeLegend= ref("");
     function receiveEmit(legend) {
         activeLegend.value = legend;
-        //console.log(legendName)
     }
 
     function menuAdditionnalPnp() {
@@ -145,6 +134,9 @@
                     v-if="mainpage" 
                     alt style="max-height: 100%">
                 <div
+                    v-if="mainpage">Fan Legends
+                </div>
+                <div
                     v-if="!mainpage && !filter">{{activeLegend.name}}
                 </div>
                 <template v-slot:append>
@@ -213,5 +205,4 @@
 
     }
 }
-
 </style>
